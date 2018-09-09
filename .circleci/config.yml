@@ -18,7 +18,7 @@ jobs:
       - checkout
       - run:
           name: export google_services json
-          command: echo $GOOGLE_SERVICES_JSON | base64 --decode > /home/circleci/app/google-services.json
+          command: echo $GOOGLE_SERVICES_JSON | base64 --decode > /home/circleci/repo/app/google-services.json
 
       # Download and cache dependencies
       - restore_cache:
