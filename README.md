@@ -1,4 +1,4 @@
-#ChristInSong Android mobile app
+# ChristInSong Android mobile app
 
 [![CircleCI](https://circleci.com/gh/TinasheMzondiwa/christ-in-song-android/tree/master.svg?style=shield)](https://circleci.com/gh/TinasheMzondiwa/christ-in-song-android/tree/master)
 
