@@ -17,7 +17,8 @@
 package com.tinashe.christInSong.di
 
 import android.content.Context
-import com.tinashe.christInSong.BuildConfig
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.tinashe.christInSong.HymnalApp
 import dagger.Module
 import dagger.Provides
@@ -32,5 +33,13 @@ internal class HymnalAppModule {
 
     @Provides
     @Singleton
-    fun provideVersion(): String = BuildConfig.VERSION_NAME
+    fun provideFireStoreDatabase(): FirebaseFirestore {
+        val store = FirebaseFirestore.getInstance()
+        val settings = FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build()
+        store.firestoreSettings = settings
+
+        return store
+    }
 }

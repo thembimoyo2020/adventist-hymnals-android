@@ -18,13 +18,32 @@ package com.tinashe.christInSong.ui.splash
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.google.firebase.firestore.BuildConfig
+import com.google.firebase.firestore.FirebaseFirestore
+import com.tinashe.christInSong.data.model.Hymnal
+import timber.log.Timber
 import javax.inject.Inject
 
-class SplashViewModel @Inject constructor(versionName: String) : ViewModel() {
+class SplashViewModel @Inject constructor(fireStore: FirebaseFirestore) : ViewModel() {
 
     var appVersion = MutableLiveData<String>()
 
     init {
-        appVersion.value = versionName
+        appVersion.value = "v ${BuildConfig.VERSION_NAME}"
+
+        val hymnals = fireStore.collection("hymnals")
+        hymnals.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+
+                snapshot.forEach {
+                    val hymnal = it.toObject(Hymnal::class.java)
+                    Timber.d("$hymnal")
+                }
+
+            } else {
+                Timber.e(task.exception)
+            }
+        }
     }
 }
