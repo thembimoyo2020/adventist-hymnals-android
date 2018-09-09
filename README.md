@@ -1,5 +1,6 @@
-# christ-in-song-android
-ChristInSong Android mobile app
+#ChristInSong Android mobile app
+
+[![CircleCI](https://circleci.com/gh/TinasheMzondiwa/christ-in-song-android/tree/master.svg?style=shield)](https://circleci.com/gh/TinasheMzondiwa/christ-in-song-android/tree/master)
 
 This is a re-write of the previous version removed from Google Playstore
 
