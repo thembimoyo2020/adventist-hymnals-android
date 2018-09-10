@@ -16,6 +16,7 @@
 
 package com.tinashe.christInSong.di
 
+import com.tinashe.christInSong.ui.home.navigation.NavigationFragment
 import com.tinashe.christInSong.ui.splash.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -25,4 +26,7 @@ internal abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract fun bindSplashActivity(): SplashActivity
+
+    @ContributesAndroidInjector
+    abstract fun bindNavigationFragment(): NavigationFragment
 }

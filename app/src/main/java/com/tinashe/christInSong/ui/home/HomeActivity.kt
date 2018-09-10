@@ -3,6 +3,7 @@ package com.tinashe.christInSong.ui.home
 import android.os.Bundle
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.ui.base.BaseThemedActivity
+import com.tinashe.christInSong.ui.home.navigation.NavigationFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseThemedActivity() {
@@ -19,7 +20,8 @@ class HomeActivity : BaseThemedActivity() {
         }
 
         bottomAppBar.setNavigationOnClickListener {
-
+            val fragment = NavigationFragment()
+            fragment.show(supportFragmentManager, fragment.tag)
         }
     }
 }
