@@ -16,11 +16,5 @@
   -->
 
 <resources>
-    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@color/window_background</item>
-        <item name="colorAccent">@color/primary</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="android:windowLightNavigationBar">@bool/is_light_nav</item>
-    </style>
+    <bool name="is_light_nav">true</bool>
 </resources>
