@@ -17,10 +17,12 @@
 package com.tinashe.christInSong.ui.splash
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.di.ViewModelFactory
+import com.tinashe.christInSong.ui.home.HomeActivity
 import com.tinashe.christInSong.utils.getViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -42,5 +44,8 @@ class SplashActivity : AppCompatActivity() {
         viewModel.appVersion.observe(this, Observer {
             versionLabel.text = it
         })
+
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
     }
 }

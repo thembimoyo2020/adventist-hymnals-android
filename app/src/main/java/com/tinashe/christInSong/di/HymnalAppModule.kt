@@ -37,6 +37,7 @@ internal class HymnalAppModule {
         val store = FirebaseFirestore.getInstance()
         val settings = FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
+                .setTimestampsInSnapshotsEnabled(true)
                 .build()
         store.firestoreSettings = settings
 

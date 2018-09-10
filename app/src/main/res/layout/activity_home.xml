@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:backgroundTint="@color/primary"
+        app:buttonGravity="bottom|top"
+        app:fabAlignmentMode="center"
+        app:hideOnScroll="true"
+        app:navigationIcon="@drawable/ic_menu"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:layout_anchor="@id/bottomAppBar"
+        app:layout_behavior="com.tinashe.christInSong.ui.custom.FloatingActionBehaviour"
+        app:srcCompat="@drawable/round_dialpad"  />
+
+</android.support.design.widget.CoordinatorLayout>
