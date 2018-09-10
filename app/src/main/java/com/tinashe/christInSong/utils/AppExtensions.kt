@@ -18,15 +18,19 @@ package com.tinashe.christInSong.utils
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tinashe.christInSong.di.ViewModelFactory
+import java.util.*
 
 inline fun <reified T : ViewModel> getViewModel(activity: FragmentActivity, factory: ViewModelFactory): T {
     return ViewModelProviders.of(activity, factory)[T::class.java]
@@ -56,3 +60,16 @@ fun RecyclerView.horizontal() {
 
 fun inflateView(@LayoutRes layoutResId: Int, parent: ViewGroup, attachToRoot: Boolean): View =
         LayoutInflater.from(parent.context).inflate(layoutResId, parent, attachToRoot)
+
+fun String.toColor() = Color.parseColor(this)
+
+fun Drawable.tint(color: Int) {
+    DrawableCompat.wrap(this)
+    DrawableCompat.setTint(this, color)
+    DrawableCompat.unwrap<Drawable>(this)
+}
+
+/**
+ * Returns a random element.
+ */
+fun <E> List<E>.random(): E? = if (size > 0) get(Random().nextInt(size)) else null

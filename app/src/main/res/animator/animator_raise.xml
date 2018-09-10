@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ Copyright (c) 2018. Tinashe Mzondiwa.
   ~
@@ -15,10 +16,26 @@
   ~ limitations under the License.
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <corners
-        android:topLeftRadius="@dimen/bottom_sheet_corner_radius"
-        android:topRightRadius="@dimen/bottom_sheet_corner_radius" />
-    <solid android:color="@color/window_background" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_activated="true">
+
+        <objectAnimator
+            android:duration="120"
+            android:propertyName="translationZ"
+            android:valueTo="12dp"
+            android:valueType="floatType" />
+
+    </item>
+
+    <item android:state_activated="false">
+
+        <objectAnimator
+            android:duration="@android:integer/config_shortAnimTime"
+            android:propertyName="translationZ"
+            android:valueTo="0dp"
+            android:valueType="floatType" />
+
+    </item>
+
+</selector>
