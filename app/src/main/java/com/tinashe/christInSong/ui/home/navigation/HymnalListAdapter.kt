@@ -16,6 +16,7 @@
 
 package com.tinashe.christInSong.ui.home.navigation
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -28,12 +29,17 @@ import com.tinashe.christInSong.utils.toColor
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.hymnal_item.*
 
-class HymnalListAdapter : RecyclerView.Adapter<HymnalListAdapter.Holder>() {
+class HymnalListAdapter constructor(private val callback: (Hymnal) -> Unit) : RecyclerView.Adapter<HymnalListAdapter.Holder>() {
 
-    var hymnals = emptyList<Hymnal>()
+    var hymnals = arrayListOf<Hymnal>()
         set(value) {
-            field = value
-            notifyDataSetChanged()
+            val callback = HymnalDiffCallBack(field, value)
+            val diffResult = DiffUtil.calculateDiff(callback)
+
+            field.clear()
+            field.addAll(value)
+
+            diffResult.dispatchUpdatesTo(this)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): Holder = Holder.inflate(parent)
@@ -41,8 +47,37 @@ class HymnalListAdapter : RecyclerView.Adapter<HymnalListAdapter.Holder>() {
     override fun getItemCount(): Int = hymnals.size
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(hymnals[position])
-        holder.itemView.setOnClickListener { }
+        val hymnal = hymnals[position]
+
+        holder.bind(hymnal)
+        holder.itemView.setOnClickListener { callback.invoke(hymnal) }
+    }
+
+    fun itemChanged(hymnal: Hymnal) {
+        val item = hymnals.find { it.code == hymnal.code } ?: return
+        notifyItemChanged(hymnals.indexOf(item))
+    }
+
+    class HymnalDiffCallBack(private val oldList: List<Hymnal>,
+                             private val newList: List<Hymnal>) : DiffUtil.Callback() {
+
+        override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean {
+            val oldItem = oldList[oldPosition]
+            val newItem = newList[newPosition]
+
+            return oldItem.code == newItem.code && oldItem.available == newItem.available
+        }
+
+        override fun areItemsTheSame(oldPosition: Int, newPosition: Int): Boolean {
+            val oldItem = oldList[oldPosition]
+            val newItem = newList[newPosition]
+
+            return oldItem.code == newItem.code && oldItem.available == newItem.available
+        }
+
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
     }
 
     class Holder constructor(override val containerView: View) :
@@ -54,6 +89,8 @@ class HymnalListAdapter : RecyclerView.Adapter<HymnalListAdapter.Holder>() {
 
             val color = COLORS.random()?.toColor() ?: COLORS[0].toColor()
             icon.background.tint(color)
+
+            contentView.alpha = if (hymnal.available) 1f else 0.3f
         }
 
         companion object {

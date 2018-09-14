@@ -43,7 +43,7 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
 
     private var behavior: BottomSheetBehavior<FrameLayout>? = null
 
-    private val hymnalListAdapter = HymnalListAdapter()
+    private val hymnalListAdapter = HymnalListAdapter { viewModel.hymnalSelected(it) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -63,8 +63,11 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
         viewModel.hymnals.observe(this, Observer {
 
             it?.let { hymnals ->
-                hymnalListAdapter.hymnals = hymnals
+                hymnalListAdapter.hymnals = ArrayList(hymnals)
             }
+        })
+        viewModel.updatedHymnal.observe(this, Observer {
+            it?.let { hymnal -> hymnalListAdapter.itemChanged(hymnal) }
         })
 
         close.setOnClickListener {

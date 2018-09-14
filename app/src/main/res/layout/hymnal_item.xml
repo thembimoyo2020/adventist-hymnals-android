@@ -38,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/contentView">
 
         <TextView
             android:id="@+id/name"

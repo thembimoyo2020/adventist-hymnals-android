@@ -43,6 +43,12 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    kapt {
+        arguments {
+            arg('room.schemaLocation', "$projectDir/schema")
+        }
+    }
 }
 
 dependencies {
@@ -65,6 +71,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
 
     implementation "com.google.firebase:firebase-core:16.0.3"
     implementation "com.google.firebase:firebase-firestore:17.1.0"

@@ -44,8 +44,11 @@ class SplashActivity : AppCompatActivity() {
         viewModel.appVersion.observe(this, Observer {
             versionLabel.text = it
         })
-
-        startActivity(Intent(this, HomeActivity::class.java))
-        finish()
+        viewModel.initialised.observe(this, Observer {
+            if (it == true) {
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
+        })
     }
 }

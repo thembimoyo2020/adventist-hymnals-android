@@ -16,6 +16,34 @@
 
 package com.tinashe.christInSong.data.model
 
-data class Hymnal(val name: String, val language: String, val code: String) {
+import android.arch.persistence.room.PrimaryKey
+
+open class Hymnal(var name: String,
+
+                  var language: String,
+
+                  @PrimaryKey
+                  var code: String) : Comparable<Hymnal> {
+
     constructor() : this("", "", "")
+
+    var available: Boolean = false
+
+    override fun equals(other: Any?): Boolean {
+        return other is Hymnal && other.code == code
+    }
+
+    override fun hashCode(): Int {
+        return code.hashCode()
+    }
+
+    override fun compareTo(other: Hymnal): Int {
+        return when {
+            code == "eng" -> -1
+            available -> -1
+            other.code == "eng" -> 1
+            other.available -> 1
+            else -> name.compareTo(other.name)
+        }
+    }
 }
