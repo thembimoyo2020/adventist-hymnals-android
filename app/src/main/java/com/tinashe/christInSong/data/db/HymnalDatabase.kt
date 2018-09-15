@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2018. Tinashe Mzondiwa.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.tinashe.christInSong.data.db
 
 import android.arch.persistence.db.SupportSQLiteDatabase
@@ -7,19 +23,23 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
 import com.tinashe.christInSong.data.db.dao.HymnalDao
+import com.tinashe.christInSong.data.db.dao.HymnsDao
+import com.tinashe.christInSong.data.model.Hymn
 import com.tinashe.christInSong.data.model.LocalHymnal
+import com.tinashe.christInSong.utils.HymnsUtil
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.IO
 import kotlinx.coroutines.experimental.launch
-import timber.log.Timber
 import kotlin.coroutines.experimental.CoroutineContext
 
-@Database(entities = [(LocalHymnal::class)], version = 1)
+@Database(entities = [(LocalHymnal::class), (Hymn::class)], version = 1)
 @TypeConverters(DataTypeConverters::class)
 abstract class HymnalDatabase : RoomDatabase() {
 
     abstract fun hymnalDao(): HymnalDao
+
+    abstract fun hymnsDao(): HymnsDao
 
     companion object {
         private const val DATABASE_NAME = "cis_hymnal_db"
@@ -41,11 +61,18 @@ abstract class HymnalDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
 
+                        /**
+                         * Load default hymns when database is created
+                         */
                         launch {
-                            getInstance(context).hymnalDao()
+                            val database = getInstance(context)
+
+                            database.hymnalDao()
                                     .insert(LocalHymnal.default)
 
-                            Timber.d("Default inserted")
+                            val hymns = HymnsUtil.getHymns(context)
+
+                            hymns.forEach { database.hymnsDao().insert(it) }
                         }
                     }
                 })

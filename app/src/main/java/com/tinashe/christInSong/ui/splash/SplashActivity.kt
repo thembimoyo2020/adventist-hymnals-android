@@ -16,10 +16,12 @@
 
 package com.tinashe.christInSong.ui.splash
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.tinashe.christInSong.BuildConfig
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.di.ViewModelFactory
 import com.tinashe.christInSong.ui.home.HomeActivity
@@ -35,15 +37,15 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var viewModel: SplashViewModel
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         setContentView(R.layout.activity_splash)
 
+        versionLabel.text = "v ${BuildConfig.VERSION_NAME}"
+
         viewModel = getViewModel(this, viewModelFactory)
-        viewModel.appVersion.observe(this, Observer {
-            versionLabel.text = it
-        })
         viewModel.initialised.observe(this, Observer {
             if (it == true) {
                 startActivity(Intent(this, HomeActivity::class.java))
