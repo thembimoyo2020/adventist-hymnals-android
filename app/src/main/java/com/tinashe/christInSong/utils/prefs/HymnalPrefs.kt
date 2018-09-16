@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-package com.tinashe.christInSong.di
+package com.tinashe.christInSong.utils.prefs
 
-import com.tinashe.christInSong.ui.home.HomeActivity
-import com.tinashe.christInSong.ui.home.navigation.NavigationFragment
-import com.tinashe.christInSong.ui.splash.SplashActivity
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+interface HymnalPrefs {
 
-@Module
-internal abstract class ActivityBuilder {
+    fun getLanguage(): String
 
-    @ContributesAndroidInjector
-    abstract fun bindSplashActivity(): SplashActivity
+    fun setLanguage(language: String)
 
-    @ContributesAndroidInjector
-    abstract fun bindHomeActivity(): HomeActivity
+    fun getLastHymnNumber(): Int
 
-    @ContributesAndroidInjector
-    abstract fun bindNavigationFragment(): NavigationFragment
+    fun setLastHymnNumber(number: Int)
+
+    fun isNightMode(): Boolean
+
+    fun setNightMode(isNight: Boolean)
 }

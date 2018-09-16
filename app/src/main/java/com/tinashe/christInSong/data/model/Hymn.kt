@@ -19,9 +19,12 @@ package com.tinashe.christInSong.data.model
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Index
 import android.arch.persistence.room.PrimaryKey
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "hymns", indices = [Index(value = ["body", "editedBody"])])
+@Parcelize
 data class Hymn(
 
         @PrimaryKey
@@ -40,4 +43,4 @@ data class Hymn(
 
         var favorite: Boolean = false,
 
-        var collection: String? = null)
+        var collection: String? = null) : Parcelable

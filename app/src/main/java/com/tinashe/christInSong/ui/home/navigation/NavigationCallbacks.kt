@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-package com.tinashe.christInSong.di
+package com.tinashe.christInSong.ui.home.navigation
 
-import com.tinashe.christInSong.ui.home.HomeActivity
-import com.tinashe.christInSong.ui.home.navigation.NavigationFragment
-import com.tinashe.christInSong.ui.splash.SplashActivity
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import android.support.annotation.IdRes
 
-@Module
-internal abstract class ActivityBuilder {
+interface NavigationCallbacks {
 
-    @ContributesAndroidInjector
-    abstract fun bindSplashActivity(): SplashActivity
+    fun hymnalSelected(language: String)
 
-    @ContributesAndroidInjector
-    abstract fun bindHomeActivity(): HomeActivity
+    fun themeChanged()
 
-    @ContributesAndroidInjector
-    abstract fun bindNavigationFragment(): NavigationFragment
+    fun navigateTo(@IdRes selection: Int)
+
 }

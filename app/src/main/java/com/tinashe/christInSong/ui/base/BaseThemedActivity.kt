@@ -20,13 +20,20 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
+import com.tinashe.christInSong.utils.prefs.HymnalPrefs
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 abstract class BaseThemedActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var prefs: HymnalPrefs
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
 
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+        delegate.setLocalNightMode(if (prefs.isNightMode()) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

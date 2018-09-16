@@ -17,10 +17,12 @@
 package com.tinashe.christInSong.ui.home.navigation
 
 import android.arch.lifecycle.Observer
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,7 @@ import com.tinashe.christInSong.R
 import com.tinashe.christInSong.di.ViewModelFactory
 import com.tinashe.christInSong.ui.base.RoundedBottomSheetDialogFragment
 import com.tinashe.christInSong.utils.getViewModel
+import com.tinashe.christInSong.utils.prefs.HymnalPrefs
 import com.tinashe.christInSong.utils.vertical
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_navigation.*
@@ -39,11 +42,18 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+    @Inject
+    lateinit var prefs: HymnalPrefs
+
     private lateinit var viewModel: NavigationViewModel
+
+    private lateinit var callbacks: NavigationCallbacks
 
     private var behavior: BottomSheetBehavior<FrameLayout>? = null
 
     private val hymnalListAdapter = HymnalListAdapter { viewModel.hymnalSelected(it) }
+
+    private var themeSwitch: SwitchCompat? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -53,6 +63,12 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
         }
 
         return inflater.inflate(R.layout.fragment_navigation, container, false)
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        callbacks = context as NavigationCallbacks
     }
 
     override fun onViewCreated(contentView: View, savedInstanceState: Bundle?) {
@@ -70,6 +86,10 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
             it?.let { hymnal -> hymnalListAdapter.itemChanged(hymnal) }
         })
 
+        initUi()
+    }
+
+    private fun initUi() {
         close.setOnClickListener {
             behavior?.let { b ->
                 b.state = BottomSheetBehavior.STATE_HIDDEN
@@ -77,8 +97,22 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
         }
 
         navView.setNavigationItemSelectedListener {
-
+            if (it.itemId == R.id.nav_switch) {
+                themeSwitch?.toggle()
+            } else {
+                close.performClick()
+                callbacks.navigateTo(it.itemId)
+            }
             true
+        }
+
+        val item = navView.menu.findItem(R.id.nav_switch)
+        themeSwitch = item.actionView.findViewById(R.id.switchTheme)
+        themeSwitch?.isChecked = prefs.isNightMode()
+        themeSwitch?.setOnCheckedChangeListener { _, isChecked ->
+            prefs.setNightMode(isChecked)
+            close.performClick()
+            callbacks.themeChanged()
         }
 
         val header = navView.getHeaderView(0)
@@ -96,9 +130,9 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
         behavior = BottomSheetBehavior.from(bottomSheet)
 
         behavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(view: View, p1: Float) {
+            override fun onSlide(view: View, slide: Float) {
 
-                header.isActivated = p1 >= 1
+                header.isActivated = slide >= 1
             }
 
             override fun onStateChanged(p0: View, state: Int) {

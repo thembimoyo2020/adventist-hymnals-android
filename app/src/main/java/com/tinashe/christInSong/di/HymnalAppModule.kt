@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.tinashe.christInSong.HymnalApp
 import com.tinashe.christInSong.data.db.HymnalDatabase
+import com.tinashe.christInSong.utils.prefs.HymnalPrefs
+import com.tinashe.christInSong.utils.prefs.HymnalPrefsImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -48,5 +50,9 @@ internal class HymnalAppModule {
     @Provides
     @Singleton
     fun provideLocalDatabase(context: Context): HymnalDatabase = HymnalDatabase.getInstance(context)
+
+    @Provides
+    @Singleton
+    fun providePrefs(context: Context): HymnalPrefs = HymnalPrefsImpl(context)
 
 }

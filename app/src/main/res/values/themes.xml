@@ -16,9 +16,9 @@
 
 <resources>
 
-    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar"/>
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
-    <style name="Theme.Hymnal" parent="BaseTheme" >
+    <style name="Theme.Hymnal" parent="BaseTheme">
         <item name="android:windowBackground">@color/window_background</item>
 
         <item name="colorPrimary">@color/primary</item>
@@ -33,6 +33,10 @@
     <style name="Theme.Hymnal.Launcher">
         <item name="android:windowBackground">@color/primary</item>
         <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="Theme.Hymnal.Home">
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <!-- set the rounded drawable as background to your bottom sheet -->
@@ -50,6 +54,12 @@
         <item name="android:navigationBarColor">@color/window_background</item>
         <item name="colorAccent">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
+    </style>
+
+    <!-- This will set the fade in animation on all your activities by default -->
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
 </resources>

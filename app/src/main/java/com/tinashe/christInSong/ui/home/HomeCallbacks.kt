@@ -14,23 +14,9 @@
  * limitations under the License.
  */
 
-package com.tinashe.christInSong.di
+package com.tinashe.christInSong.ui.home
 
-import com.tinashe.christInSong.ui.home.HomeActivity
-import com.tinashe.christInSong.ui.home.navigation.NavigationFragment
-import com.tinashe.christInSong.ui.splash.SplashActivity
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import com.tinashe.christInSong.ui.home.navigation.NavigationCallbacks
 
-@Module
-internal abstract class ActivityBuilder {
-
-    @ContributesAndroidInjector
-    abstract fun bindSplashActivity(): SplashActivity
-
-    @ContributesAndroidInjector
-    abstract fun bindHomeActivity(): HomeActivity
-
-    @ContributesAndroidInjector
-    abstract fun bindNavigationFragment(): NavigationFragment
+interface HomeCallbacks: NavigationCallbacks {
 }

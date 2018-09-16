@@ -55,7 +55,7 @@ class NavigationViewModel @Inject constructor(private val fireStore: FirebaseFir
             }
 
             withContext(Dispatchers.Main) {
-                hymnals.postValue(result)
+                hymnals.value = result
             }
 
             val collectionReference = fireStore.collection(Collections.HYMNALS)

@@ -18,6 +18,7 @@ package com.tinashe.christInSong.di
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.tinashe.christInSong.ui.home.HomeViewModel
 import com.tinashe.christInSong.ui.home.navigation.NavigationViewModel
 import com.tinashe.christInSong.ui.splash.SplashViewModel
 import dagger.Binds
@@ -31,6 +32,11 @@ internal abstract class ViewModelBuilder {
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
     internal abstract fun bindSplashViewModel(splashViewModel: SplashViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    internal abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @Binds
     @IntoMap
