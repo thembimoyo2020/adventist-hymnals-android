@@ -26,4 +26,6 @@
     <color name="text">#0a0d10</color>
     <color name="secondary">#727272</color>
     <color name="divider">#e0e0e0</color>
+
+    <color name="scrim">#99323232</color>
 </resources>

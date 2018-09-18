@@ -19,17 +19,39 @@ package com.tinashe.christInSong.ui.home.hymns
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Html
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.data.model.Hymn
+import com.tinashe.christInSong.ui.home.hymns.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_hymn.*
 
 class HymnFragment : Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_hymn, container, false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_hymns, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        return when (item?.itemId) {
+            R.id.action_search -> {
+                SearchActivity.launch(activity!!)
+
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
