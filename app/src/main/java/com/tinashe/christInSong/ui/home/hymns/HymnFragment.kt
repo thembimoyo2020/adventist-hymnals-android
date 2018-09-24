@@ -45,7 +45,7 @@ class HymnFragment : Fragment() {
 
         return when (item?.itemId) {
             R.id.action_search -> {
-                SearchActivity.launch(activity!!)
+                SearchActivity.launch(activity!!, RC_SEARCH)
 
                 true
             }
@@ -65,6 +65,8 @@ class HymnFragment : Fragment() {
     companion object {
 
         private const val HYMN = "HYMN"
+
+        const val RC_SEARCH = 123
 
         fun newInstance(hymn: Hymn): HymnFragment {
 

@@ -16,14 +16,19 @@
 
 package com.tinashe.christInSong.ui.home
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.v4.view.ViewPager
 import com.tinashe.christInSong.R
+import com.tinashe.christInSong.data.model.Hymn
 import com.tinashe.christInSong.di.ViewModelFactory
 import com.tinashe.christInSong.ui.base.BaseThemedActivity
+import com.tinashe.christInSong.ui.home.hymns.HymnFragment
 import com.tinashe.christInSong.ui.home.hymns.HymnsFragmentPagerAdapter
+import com.tinashe.christInSong.ui.home.hymns.search.SearchActivity
 import com.tinashe.christInSong.ui.home.navigation.NavigationFragment
 import com.tinashe.christInSong.utils.getViewModel
 import kotlinx.android.synthetic.main.activity_home.*
@@ -104,6 +109,16 @@ class HomeActivity : BaseThemedActivity(), HomeCallbacks {
             }
             R.id.nav_feedback -> {
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == HymnFragment.RC_SEARCH && resultCode == Activity.RESULT_OK) {
+            val hymn: Hymn = data?.extras?.getParcelable(SearchActivity.SELECTED_HYMN) ?: return
+
+            viewPager.postDelayed({ viewModel.switchToHymn(hymn) }, 300)
         }
     }
 }

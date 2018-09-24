@@ -58,4 +58,10 @@ class HomeViewModel @Inject constructor(private val database: HymnalDatabase,
         prefs.setLastHymnNumber(position + 1)
         number.postValue(position + 1)
     }
+
+    fun switchToHymn(hymn: Hymn){
+        prefs.setLastHymnNumber(hymn.number)
+
+        hymnalChanged(hymn.language)
+    }
 }
