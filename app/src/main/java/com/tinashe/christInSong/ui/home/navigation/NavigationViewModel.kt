@@ -63,7 +63,7 @@ class NavigationViewModel @Inject constructor(private val fireStore: FirebaseFir
                 if (task.isSuccessful) {
                     val snapshot = task.result
 
-                    snapshot.forEach { data ->
+                    snapshot?.forEach { data ->
                         val hymnal = data.toObject(Hymnal::class.java)
 
                         if (!result.contains(hymnal)) {
