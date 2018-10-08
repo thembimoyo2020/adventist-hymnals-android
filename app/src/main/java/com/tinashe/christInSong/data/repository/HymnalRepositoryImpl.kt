@@ -15,27 +15,6 @@ class HymnalRepositoryImpl constructor(private val database: HymnalDatabase,
 
     override fun listHymnals(): LiveData<List<Hymnal>> {
 
-        /*val list = database.hymnalDao().listAll()
-                .flatMap {
-                    val list = arrayListOf<Hymnal>()
-
-                    it.forEach { local ->
-                        val hymnal = Hymnal(local.name, local.language, local.code)
-                        hymnal.available = true
-                        list.add(hymnal)
-                    }
-
-                    Flowable.just(list)
-                }
-                .subscribe({
-                    hymnalsData.value = it
-
-                    fetchRemote()
-
-                }, {
-                    Timber.e(it)
-                })*/
-
         return hymnalsData
     }
 
@@ -49,7 +28,7 @@ class HymnalRepositoryImpl constructor(private val database: HymnalDatabase,
 
                 val list = ArrayList(hymnalsData.value ?: emptyList())
 
-                snapshot.forEach { data ->
+                snapshot?.forEach { data ->
                     val hymnal = data.toObject(Hymnal::class.java)
                     if (!list.contains(hymnal)) {
                         list.add(hymnal)
