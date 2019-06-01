@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +24,9 @@ import com.tinashe.christInSong.data.model.Hymnal
 import com.tinashe.christInSong.data.model.LocalHymnal
 import com.tinashe.christInSong.ui.base.ScopedViewModel
 import com.tinashe.christInSong.ui.base.SingleLiveEvent
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.android.Main
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 

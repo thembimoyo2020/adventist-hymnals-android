@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,11 +27,10 @@ import com.tinashe.christInSong.data.db.dao.HymnsDao
 import com.tinashe.christInSong.data.model.Hymn
 import com.tinashe.christInSong.data.model.LocalHymnal
 import com.tinashe.christInSong.utils.HymnsUtil
-import kotlinx.coroutines.experimental.CoroutineScope
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.IO
-import kotlinx.coroutines.experimental.launch
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 @Database(entities = [(LocalHymnal::class), (Hymn::class)], version = 1)
 @TypeConverters(DataTypeConverters::class)

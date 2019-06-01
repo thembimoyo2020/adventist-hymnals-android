@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,9 @@ import com.tinashe.christInSong.data.db.HymnalDatabase
 import com.tinashe.christInSong.data.model.Hymn
 import com.tinashe.christInSong.ui.base.ScopedViewModel
 import com.tinashe.christInSong.utils.prefs.HymnalPrefs
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.android.Main
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val database: HymnalDatabase,
