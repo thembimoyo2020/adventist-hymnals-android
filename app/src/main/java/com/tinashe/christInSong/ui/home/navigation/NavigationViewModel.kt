@@ -16,7 +16,7 @@
 
 package com.tinashe.christInSong.ui.home.navigation
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tinashe.christInSong.data.db.HymnalDatabase
 import com.tinashe.christInSong.data.model.Collections

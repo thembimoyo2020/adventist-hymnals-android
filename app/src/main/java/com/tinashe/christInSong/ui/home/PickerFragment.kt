@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@ package com.tinashe.christInSong.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.design.button.MaterialButton
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.button.MaterialButton
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.ui.base.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_picker.*

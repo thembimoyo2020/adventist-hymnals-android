@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,11 @@
 package com.tinashe.christInSong.ui.home
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v4.view.ViewPager
+import androidx.annotation.IdRes
+import androidx.lifecycle.Observer
+import androidx.viewpager.widget.ViewPager
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.data.model.Hymn
 import com.tinashe.christInSong.di.ViewModelFactory

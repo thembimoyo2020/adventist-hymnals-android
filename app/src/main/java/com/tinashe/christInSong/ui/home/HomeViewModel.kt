@@ -16,7 +16,7 @@
 
 package com.tinashe.christInSong.ui.home
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.tinashe.christInSong.data.db.HymnalDatabase
 import com.tinashe.christInSong.data.model.Hymn
 import com.tinashe.christInSong.ui.base.ScopedViewModel

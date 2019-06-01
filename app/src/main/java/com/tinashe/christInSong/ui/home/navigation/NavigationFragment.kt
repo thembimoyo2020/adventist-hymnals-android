@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,18 @@
 
 package com.tinashe.christInSong.ui.home.navigation
 
-import android.arch.lifecycle.Observer
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.BottomSheetDialog
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.widget.SwitchCompat
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.di.ViewModelFactory
 import com.tinashe.christInSong.ui.base.RoundedBottomSheetDialogFragment
@@ -124,7 +125,7 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
     }
 
     private fun handleBottomSheetCallback(dialog: BottomSheetDialog) {
-        val bottomSheet = dialog.findViewById<FrameLayout>(android.support.design.R.id.design_bottom_sheet)
+        val bottomSheet = dialog.findViewById<FrameLayout>(R.id.design_bottom_sheet)
                 ?: return
 
         behavior = BottomSheetBehavior.from(bottomSheet)
@@ -135,6 +136,7 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
                 header.isActivated = slide >= 1
             }
 
+            @SuppressLint("SwitchIntDef")
             override fun onStateChanged(p0: View, state: Int) {
                 when (state) {
                     BottomSheetBehavior.STATE_HIDDEN -> {

@@ -18,7 +18,6 @@ package com.tinashe.christInSong
 
 import android.app.Activity
 import android.app.Application
-import android.support.v4.app.Fragment
 import com.tinashe.christInSong.di.DaggerHymnalAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -33,11 +32,11 @@ class HymnalApp : Application(), HasActivityInjector, HasSupportFragmentInjector
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var fragmentInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> = fragmentInjector
 
     override fun onCreate() {
         super.onCreate()

@@ -1,9 +1,22 @@
+/*
+ * Copyright (c) 2019. Tinashe Mzondiwa.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.tinashe.christInSong.ui.home.hymns.search
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +26,13 @@ import com.tinashe.christInSong.ui.home.hymns.HymnsListAdapter
 import com.tinashe.christInSong.utils.vertical
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class SearchResultsPagerAdapter constructor(fragmentManager: FragmentManager,
+class SearchResultsPagerAdapter constructor(fragmentManager: androidx.fragment.app.FragmentManager,
                                             private val results: List<Hymn>,
-                                            private val callback: (Hymn) -> Unit) : FragmentStatePagerAdapter(fragmentManager) {
+                                            private val callback: (Hymn) -> Unit) : androidx.fragment.app.FragmentStatePagerAdapter(fragmentManager) {
 
     private val languages: List<String> = results.map { it.language }.distinct()
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment {
         return SearchResultsFragment.newInstance(results.filter { it.language == languages[position] },
                 callback)
     }
@@ -29,7 +42,7 @@ class SearchResultsPagerAdapter constructor(fragmentManager: FragmentManager,
     override fun getPageTitle(position: Int): CharSequence? = languages[position]
 }
 
-class SearchResultsFragment : Fragment() {
+class SearchResultsFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, container, false)

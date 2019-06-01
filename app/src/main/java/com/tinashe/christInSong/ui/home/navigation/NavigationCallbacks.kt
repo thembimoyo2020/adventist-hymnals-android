@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.tinashe.christInSong.ui.home.navigation
 
-import android.support.annotation.IdRes
+import androidx.annotation.IdRes
 
 interface NavigationCallbacks {
 
