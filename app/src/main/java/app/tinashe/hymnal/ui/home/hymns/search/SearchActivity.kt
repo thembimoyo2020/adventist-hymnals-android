@@ -24,14 +24,15 @@ import androidx.lifecycle.Observer
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymn
 import app.tinashe.hymnal.di.ViewModelFactory
-import app.tinashe.hymnal.ui.base.BaseThemedActivity
+import app.tinashe.hymnal.ui.base.BaseActivity
 import app.tinashe.hymnal.utils.getViewModel
 import app.tinashe.hymnal.utils.hide
 import app.tinashe.hymnal.utils.show
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
-class SearchActivity : BaseThemedActivity() {
+class SearchActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -42,6 +43,7 @@ class SearchActivity : BaseThemedActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         setContentView(R.layout.activity_search)
 
         setSupportActionBar(toolbar)

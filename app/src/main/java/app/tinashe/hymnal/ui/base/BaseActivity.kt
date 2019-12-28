@@ -16,28 +16,13 @@
 
 package app.tinashe.hymnal.ui.base
 
-import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import app.tinashe.hymnal.utils.prefs.HymnalPrefs
-import dagger.android.AndroidInjection
-import javax.inject.Inject
 
-abstract class BaseThemedActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var prefs: HymnalPrefs
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
-
-        delegate.setLocalNightMode(if (prefs.isNightMode()) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             android.R.id.home -> {
                 supportFinishAfterTransition()
                 true

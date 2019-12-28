@@ -18,7 +18,10 @@ package app.tinashe.hymnal
 
 import android.app.Activity
 import android.app.Application
+import androidx.fragment.app.Fragment
 import app.tinashe.hymnal.di.DaggerHymnalAppComponent
+import app.tinashe.hymnal.utils.Helper
+import app.tinashe.hymnal.utils.prefs.HymnalPrefs
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -32,11 +35,14 @@ class HymnalApp : Application(), HasActivityInjector, HasSupportFragmentInjector
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var preferences: HymnalPrefs
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
-    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> = fragmentInjector
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 
     override fun onCreate() {
         super.onCreate()
@@ -49,5 +55,7 @@ class HymnalApp : Application(), HasActivityInjector, HasSupportFragmentInjector
                 .application(this)
                 .build()
                 .inject(this)
+
+        Helper.switchToTheme(preferences.getUiPref())
     }
 }

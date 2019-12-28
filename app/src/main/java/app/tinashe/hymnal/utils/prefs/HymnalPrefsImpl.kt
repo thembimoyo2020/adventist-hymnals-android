@@ -18,11 +18,13 @@ package app.tinashe.hymnal.utils.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.core.content.edit
+import app.tinashe.hymnal.BuildConfig
+import app.tinashe.hymnal.data.model.constants.UiPref
 
 class HymnalPrefsImpl constructor(val context: Context) : HymnalPrefs {
 
-    private val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    private val prefs: SharedPreferences = context.getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE)
 
     override fun getLanguage(): String = prefs.getString(PREF_LANGUAGE, "eng") as String
 
@@ -40,17 +42,25 @@ class HymnalPrefsImpl constructor(val context: Context) : HymnalPrefs {
                 .apply()
     }
 
-    override fun isNightMode(): Boolean = prefs.getBoolean(PREF_NIGHT_MODE, false)
+    override fun getUiPref(): UiPref {
+        val value = prefs.getString(KEY_UI_THEME, UiPref.FOLLOW_SYSTEM.value)
 
-    override fun setNightMode(isNight: Boolean) {
-        prefs.edit()
-                .putBoolean(PREF_NIGHT_MODE, isNight)
-                .apply()
+        return value?.let {
+            UiPref.fromString(it)
+        } ?: UiPref.FOLLOW_SYSTEM
+    }
+
+    override fun setUiPref(pref: UiPref) {
+
+        prefs.edit {
+            putString(KEY_UI_THEME, pref.value)
+        }
     }
 
     companion object {
+        private const val KEY_PREF_NAME = "${BuildConfig.APPLICATION_ID}.prefs"
         private const val PREF_LANGUAGE = "LANGUAGE"
         private const val PREF_LAST_NUMBER = "LAST_NUMBER"
-        private const val PREF_NIGHT_MODE = "NIGHT_MODE"
+        private const val KEY_UI_THEME = "pref_ui_theme"
     }
 }

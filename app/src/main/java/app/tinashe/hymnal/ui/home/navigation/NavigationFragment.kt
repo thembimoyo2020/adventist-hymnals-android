@@ -27,8 +27,10 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
+import app.tinashe.hymnal.data.model.constants.UiPref
 import app.tinashe.hymnal.di.ViewModelFactory
 import app.tinashe.hymnal.ui.base.RoundedBottomSheetDialogFragment
+import app.tinashe.hymnal.utils.Helper
 import app.tinashe.hymnal.utils.getViewModel
 import app.tinashe.hymnal.utils.prefs.HymnalPrefs
 import app.tinashe.hymnal.utils.vertical
@@ -109,11 +111,11 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
 
         val item = navView.menu.findItem(R.id.nav_switch)
         themeSwitch = item.actionView.findViewById(R.id.switchTheme)
-        themeSwitch?.isChecked = prefs.isNightMode()
+        themeSwitch?.isChecked = Helper.isDarkTheme(requireContext())
         themeSwitch?.setOnCheckedChangeListener { _, isChecked ->
-            prefs.setNightMode(isChecked)
-            close.performClick()
-            callbacks.themeChanged()
+            val pref = if (isChecked) UiPref.NIGHT else UiPref.DAY
+            prefs.setUiPref(pref)
+            Helper.switchToTheme(pref)
         }
 
         val header = navView.getHeaderView(0)
@@ -130,10 +132,10 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
 
         behavior = BottomSheetBehavior.from(bottomSheet)
 
-        behavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        behavior?.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(view: View, slide: Float) {
 
-                header.isActivated = slide >= 1
+                header?.isActivated = slide >= 1
             }
 
             @SuppressLint("SwitchIntDef")

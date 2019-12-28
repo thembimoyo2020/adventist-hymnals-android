@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-package app.tinashe.hymnal.utils.prefs
+package app.tinashe.hymnal.data.model.constants
 
-import app.tinashe.hymnal.data.model.constants.UiPref
+enum class UiPref(val value: String) {
+    DAY("day"),
+    NIGHT("night"),
+    BATTERY_SAVER("battery_saver"),
+    FOLLOW_SYSTEM("follow_system");
 
-interface HymnalPrefs {
+    companion object {
+        private val map = values().associateBy(UiPref::value)
 
-    fun getLanguage(): String
-
-    fun setLanguage(language: String)
-
-    fun getLastHymnNumber(): Int
-
-    fun setLastHymnNumber(number: Int)
-
-    fun getUiPref(): UiPref
-
-    fun setUiPref(pref: UiPref)
+        fun fromString(type: String) = map[type]
+    }
 }

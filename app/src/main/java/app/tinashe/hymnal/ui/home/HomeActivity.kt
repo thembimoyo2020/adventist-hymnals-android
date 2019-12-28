@@ -25,17 +25,18 @@ import androidx.viewpager.widget.ViewPager
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymn
 import app.tinashe.hymnal.di.ViewModelFactory
-import app.tinashe.hymnal.ui.base.BaseThemedActivity
+import app.tinashe.hymnal.ui.base.BaseActivity
 import app.tinashe.hymnal.ui.home.hymns.HymnFragment
 import app.tinashe.hymnal.ui.home.hymns.HymnsFragmentPagerAdapter
 import app.tinashe.hymnal.ui.home.hymns.search.SearchActivity
 import app.tinashe.hymnal.ui.home.navigation.NavigationFragment
 import app.tinashe.hymnal.utils.getViewModel
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 import javax.inject.Inject
 
-class HomeActivity : BaseThemedActivity(), HomeCallbacks {
+class HomeActivity : BaseActivity(), HomeCallbacks {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -46,6 +47,7 @@ class HomeActivity : BaseThemedActivity(), HomeCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         setContentView(R.layout.activity_home)
 
         setSupportActionBar(bottomAppBar)
