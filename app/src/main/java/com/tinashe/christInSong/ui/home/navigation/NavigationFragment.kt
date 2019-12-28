@@ -58,7 +58,7 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        dialog.setOnShowListener { dialog ->
+        dialog?.setOnShowListener { dialog ->
             val bottomSheetDialog = dialog as BottomSheetDialog
             handleBottomSheetCallback(bottomSheetDialog)
         }
@@ -66,7 +66,7 @@ class NavigationFragment : RoundedBottomSheetDialogFragment() {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         callbacks = context as NavigationCallbacks

@@ -18,7 +18,12 @@ package com.tinashe.christInSong.ui.home.hymns
 
 import android.os.Bundle
 import android.text.Html
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import com.tinashe.christInSong.R
 import com.tinashe.christInSong.data.model.Hymn
 import com.tinashe.christInSong.ui.home.hymns.search.SearchActivity
@@ -35,14 +40,14 @@ class HymnFragment : androidx.fragment.app.Fragment() {
         return inflater.inflate(R.layout.fragment_hymn, container, false)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_hymns, menu)
+        inflater.inflate(R.menu.menu_hymns, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when (item?.itemId) {
+        return when (item.itemId) {
             R.id.action_search -> {
                 SearchActivity.launch(activity!!, RC_SEARCH)
 

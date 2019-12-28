@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Tinashe Mzondiwa.
+ * Copyright (c) 2019. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,6 @@ internal class HymnalAppModule {
         val store = FirebaseFirestore.getInstance()
         val settings = FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
-                .setTimestampsInSnapshotsEnabled(true)
                 .build()
         store.firestoreSettings = settings
 

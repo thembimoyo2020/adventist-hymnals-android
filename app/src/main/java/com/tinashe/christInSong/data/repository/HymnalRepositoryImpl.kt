@@ -27,7 +27,7 @@ import timber.log.Timber
 class HymnalRepositoryImpl constructor(private val database: HymnalDatabase,
                                        private val fireStore: FirebaseFirestore) : HymnalRepository {
 
-    private var hymnalsData = MutableLiveData<List<Hymnal>>()
+    private val hymnalsData = MutableLiveData<List<Hymnal>>()
 
     override fun listHymnals(): LiveData<List<Hymnal>> {
 

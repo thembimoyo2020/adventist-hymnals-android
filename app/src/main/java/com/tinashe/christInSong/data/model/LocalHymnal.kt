@@ -17,7 +17,8 @@
 package com.tinashe.christInSong.data.model
 
 import androidx.room.Entity
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 @Entity(tableName = "hymnals")
 class LocalHymnal : Hymnal() {
@@ -36,15 +37,13 @@ class LocalHymnal : Hymnal() {
 
         fun fromHymnal(hymnal: Hymnal): LocalHymnal {
 
-            val local = LocalHymnal()
-
-            local.name = hymnal.name
-            local.language = hymnal.language
-            local.code = hymnal.code
-            local.lastAccessed = Calendar.getInstance().time
-            local.available = true
-
-            return local
+            return LocalHymnal().apply {
+                name = hymnal.name
+                language = hymnal.language
+                code = hymnal.code
+                lastAccessed = Calendar.getInstance().time
+                available = true
+            }
         }
     }
 }
