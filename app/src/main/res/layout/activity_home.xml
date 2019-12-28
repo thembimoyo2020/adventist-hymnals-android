@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         app:fabSize="normal"
         app:layout_anchor="@id/bottomAppBar"
-        app:layout_behavior="com.tinashe.christInSong.ui.custom.FloatingActionBehaviour"
+        app:layout_behavior="app.tinashe.hymnal.ui.custom.FloatingActionBehaviour"
         app:srcCompat="@drawable/round_dialpad" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
