@@ -43,4 +43,7 @@
     <dimen name="dialogPreferredPadding">24dp</dimen>
     <dimen name="dialogPreferredPaddingLarge">36dp</dimen> <!-- dialogPreferredPadding + 12dp -->
 
+    <dimen name="hymnal_card_with">110dp</dimen>
+    <dimen name="hymnal_card_height">160dp</dimen>
+
 </resources>

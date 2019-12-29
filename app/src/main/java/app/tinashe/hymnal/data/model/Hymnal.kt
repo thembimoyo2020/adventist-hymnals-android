@@ -16,8 +16,12 @@
 
 package app.tinashe.hymnal.data.model
 
+import android.os.Parcelable
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 open class Hymnal(var name: String,
 
                   var language: String,
@@ -25,10 +29,11 @@ open class Hymnal(var name: String,
                   @PrimaryKey
                   var code: String,
 
-                  var cover: String? = null) : Comparable<Hymnal> {
+                  var cover: String? = null) : Comparable<Hymnal>, Parcelable {
 
     constructor() : this("", "", "")
 
+    @IgnoredOnParcel
     var available: Boolean = false
 
     override fun equals(other: Any?): Boolean {

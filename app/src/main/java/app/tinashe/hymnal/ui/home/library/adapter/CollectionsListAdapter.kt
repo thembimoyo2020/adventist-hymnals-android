@@ -19,13 +19,15 @@ package app.tinashe.hymnal.ui.home.library.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import app.tinashe.hymnal.data.model.HymnalCollection
+import app.tinashe.hymnal.ui.home.library.LibraryCallbacks
 import app.tinashe.hymnal.ui.home.library.LibraryViewModel
 import app.tinashe.hymnal.ui.home.library.adapter.vh.CollectionHolder
 
-class CollectionsListAdapter(private val viewModel: LibraryViewModel) : ListAdapter<HymnalCollection, CollectionHolder>(CollectionsDiff) {
+class CollectionsListAdapter(private val viewModel: LibraryViewModel,
+                             private val callbacks: LibraryCallbacks) : ListAdapter<HymnalCollection, CollectionHolder>(CollectionsDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionHolder {
-        return CollectionHolder.inflate(parent, viewModel)
+        return CollectionHolder.inflate(parent, viewModel, callbacks)
     }
 
     override fun onBindViewHolder(holder: CollectionHolder, position: Int) {

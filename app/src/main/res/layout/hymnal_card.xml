@@ -18,10 +18,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
-    android:layout_width="110dp"
-    android:layout_height="160dp"
+    android:layout_width="@dimen/hymnal_card_with"
+    android:layout_height="@dimen/hymnal_card_height"
     android:layout_margin="6dp"
     android:stateListAnimator="@animator/lift_on_touch"
+    android:transitionName="@string/transition_hymnal_cover"
     app:cardCornerRadius="6dp"
     app:cardElevation="0dp">
 

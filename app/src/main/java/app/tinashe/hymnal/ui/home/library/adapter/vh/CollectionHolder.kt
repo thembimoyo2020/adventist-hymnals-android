@@ -24,13 +24,15 @@ import app.tinashe.hymnal.data.model.Hymnal
 import app.tinashe.hymnal.data.model.HymnalCollection
 import app.tinashe.hymnal.extensions.horizontal
 import app.tinashe.hymnal.extensions.inflateView
+import app.tinashe.hymnal.ui.home.library.LibraryCallbacks
 import app.tinashe.hymnal.ui.home.library.LibraryViewModel
 import app.tinashe.hymnal.ui.home.library.adapter.LibraryListAdapter
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.hymnal_collection.*
 
 class CollectionHolder constructor(override val containerView: View,
-                                   private val viewModel: LibraryViewModel) :
+                                   private val viewModel: LibraryViewModel,
+                                   private val callbacks: LibraryCallbacks) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     init {
@@ -42,7 +44,7 @@ class CollectionHolder constructor(override val containerView: View,
     fun bind(collection: HymnalCollection) {
         tvTitle.text = collection.name
 
-        val listAdapter = LibraryListAdapter()
+        val listAdapter = LibraryListAdapter(callbacks)
         recyclerView.adapter = listAdapter
 
         val hymnals = arrayListOf<Hymnal>()
@@ -57,7 +59,7 @@ class CollectionHolder constructor(override val containerView: View,
 
     companion object {
 
-        fun inflate(parent: ViewGroup, viewModel: LibraryViewModel): CollectionHolder = CollectionHolder(
-                inflateView(R.layout.hymnal_collection, parent, false), viewModel)
+        fun inflate(parent: ViewGroup, viewModel: LibraryViewModel, callbacks: LibraryCallbacks): CollectionHolder = CollectionHolder(
+                inflateView(R.layout.hymnal_collection, parent, false), viewModel, callbacks)
     }
 }

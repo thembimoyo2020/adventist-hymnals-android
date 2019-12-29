@@ -19,9 +19,10 @@ package app.tinashe.hymnal.ui.home.library.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import app.tinashe.hymnal.data.model.Hymnal
+import app.tinashe.hymnal.ui.home.library.LibraryCallbacks
 import app.tinashe.hymnal.ui.home.library.adapter.vh.HymnalHolder
 
-class LibraryListAdapter : ListAdapter<Hymnal, HymnalHolder>(HymnalDiff) {
+class LibraryListAdapter(private val callbacks: LibraryCallbacks) : ListAdapter<Hymnal, HymnalHolder>(HymnalDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HymnalHolder {
         return HymnalHolder.inflate(parent)
@@ -33,7 +34,7 @@ class LibraryListAdapter : ListAdapter<Hymnal, HymnalHolder>(HymnalDiff) {
         holder.bind(item)
 
         holder.itemView.setOnClickListener {
-
+            callbacks.openHymnal(item, it)
         }
     }
 }

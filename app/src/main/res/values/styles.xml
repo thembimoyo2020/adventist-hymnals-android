@@ -87,7 +87,11 @@
     </style>
 
     <style name="Hymnal.TextAppearance.Toolbar" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:fontFamily">@font/averia_libre_bold</item>
+        <item name="android:fontFamily">@font/sans_bold</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="Hymnal.TabTextAppearance.Tab" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
     </style>
 </resources>

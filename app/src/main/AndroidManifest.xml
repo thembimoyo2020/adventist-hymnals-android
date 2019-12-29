@@ -44,6 +44,10 @@
         <activity
             android:name=".ui.home.hymns.search.SearchActivity"
             android:theme="@style/Theme.Hymnal.Search" />
+
+        <activity
+            android:name=".ui.home.hymnal.HymnalActivity"
+            android:label="@string/blank" />
     </application>
 
 </manifest>

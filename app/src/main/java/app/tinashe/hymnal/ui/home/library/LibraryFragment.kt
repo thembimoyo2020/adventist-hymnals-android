@@ -21,16 +21,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.tinashe.hymnal.R
+import app.tinashe.hymnal.data.model.Hymnal
+import app.tinashe.hymnal.data.model.HymnalCollection
 import app.tinashe.hymnal.di.ViewModelFactory
 import app.tinashe.hymnal.extensions.getViewModel
 import app.tinashe.hymnal.extensions.observeNonNull
 import app.tinashe.hymnal.ui.base.BasePageFragment
+import app.tinashe.hymnal.ui.home.hymnal.HymnalActivity
 import app.tinashe.hymnal.ui.home.library.adapter.CollectionsListAdapter
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_library.*
 import javax.inject.Inject
 
-class LibraryFragment : BasePageFragment() {
+class LibraryFragment : BasePageFragment(), LibraryCallbacks {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -59,9 +62,17 @@ class LibraryFragment : BasePageFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listAdapter = CollectionsListAdapter(viewModel)
+        listAdapter = CollectionsListAdapter(viewModel, this)
         recyclerView.adapter = listAdapter
 
         viewModel.subscribe()
+    }
+
+    override fun openHymnal(hymnal: Hymnal, sharedElement: View) {
+        HymnalActivity.launch(requireActivity(), hymnal, sharedElement)
+    }
+
+    override fun openCollection(collection: HymnalCollection) {
+
     }
 }

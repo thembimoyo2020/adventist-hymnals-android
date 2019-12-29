@@ -16,10 +16,26 @@
 
 package app.tinashe.hymnal.ui.home.hymnal
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import app.tinashe.hymnal.R
 import app.tinashe.hymnal.ui.base.BasePageFragment
+import kotlinx.android.synthetic.main.fragment_hymn.*
 
 class HymnalFragment : BasePageFragment() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_hymn, container, false)
+    }
+
     override fun scrollToTop() {
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        hymnText.setText(R.string.lorem_long)
 
     }
 }
