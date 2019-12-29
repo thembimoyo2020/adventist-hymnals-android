@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package app.tinashe.hymnal.data.model.constants
+package app.tinashe.hymnal.data.model
 
-enum class DbCollections(val value: String) {
+data class HymnalCollection(val name: String,
+                            val hymnals: List<String> = emptyList(),
+                            val order: Int = -1,
+                            var id: String = "") : Comparable<HymnalCollection> {
 
-    CATEGORIES("hymnal-categories"),
+    constructor() : this("")
 
-    HYMNALS("hymnals")
+    override fun compareTo(other: HymnalCollection): Int {
+        return order.compareTo(other.order)
+    }
 }

@@ -20,12 +20,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.di.ViewModelFactory
 import app.tinashe.hymnal.extensions.getViewModel
 import app.tinashe.hymnal.extensions.observeNonNull
 import app.tinashe.hymnal.ui.base.BasePageFragment
+import app.tinashe.hymnal.ui.home.library.adapter.CollectionsListAdapter
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_library.*
 import javax.inject.Inject
@@ -35,7 +35,7 @@ class LibraryFragment : BasePageFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val listAdapter = LibraryListAdapter()
+    private lateinit var listAdapter: CollectionsListAdapter
 
     private lateinit var viewModel: LibraryViewModel
 
@@ -43,7 +43,7 @@ class LibraryFragment : BasePageFragment() {
         super.onCreate(savedInstanceState)
         AndroidSupportInjection.inject(this)
         viewModel = getViewModel(this, viewModelFactory)
-        viewModel.hymnalsLiveData.observeNonNull(this) {
+        viewModel.hymnalCollectionsLiveData.observeNonNull(this) {
             listAdapter.submitList(it)
         }
     }
@@ -59,9 +59,7 @@ class LibraryFragment : BasePageFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(context, 3)
-            adapter = listAdapter
-        }
+        listAdapter = CollectionsListAdapter(viewModel)
+        recyclerView.adapter = listAdapter
     }
 }

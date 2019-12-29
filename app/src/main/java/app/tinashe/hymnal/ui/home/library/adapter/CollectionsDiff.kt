@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-package app.tinashe.hymnal.data.model.constants
+package app.tinashe.hymnal.ui.home.library.adapter
 
-enum class DbCollections(val value: String) {
+import androidx.recyclerview.widget.DiffUtil
+import app.tinashe.hymnal.data.model.HymnalCollection
 
-    CATEGORIES("hymnal-categories"),
+object CollectionsDiff : DiffUtil.ItemCallback<HymnalCollection>() {
+    override fun areItemsTheSame(oldItem: HymnalCollection, newItem: HymnalCollection): Boolean {
+        return oldItem.id == newItem.id
+    }
 
-    HYMNALS("hymnals")
+    override fun areContentsTheSame(oldItem: HymnalCollection, newItem: HymnalCollection): Boolean {
+        return oldItem == newItem
+    }
 }

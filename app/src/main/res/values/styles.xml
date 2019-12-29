@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019. Tinashe Mzondiwa.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,5 +38,33 @@
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="fontFamily">@font/google_sans</item>
+    </style>
+
+    <style name="Hymnal.TextAppearance.Body" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:fontFamily">@font/averia_libre</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <style name="Hymnal.TextAppearance.Body.Secondary">
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
+    <style name="Hymnal.TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">@font/averia_libre_bold</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="Hymnal.TextAppearance.Medium" parent="TextAppearance.AppCompat.Medium">
+
+    </style>
+
+    <style name="Hymnal.TextAppearance.Medium.Secondary">
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
+    <style name="Hymnal.TextAppearance.Toolbar" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/averia_libre_bold</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 </resources>

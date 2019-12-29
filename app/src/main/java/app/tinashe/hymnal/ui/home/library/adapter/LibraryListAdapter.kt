@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package app.tinashe.hymnal.ui.home.library
+package app.tinashe.hymnal.ui.home.library.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import app.tinashe.hymnal.data.model.Hymnal
-import app.tinashe.hymnal.ui.home.library.vh.HymnalHolder
+import app.tinashe.hymnal.ui.home.library.adapter.vh.HymnalHolder
 
 class LibraryListAdapter : ListAdapter<Hymnal, HymnalHolder>(HymnalDiff) {
 

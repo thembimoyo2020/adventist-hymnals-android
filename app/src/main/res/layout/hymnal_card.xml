@@ -18,54 +18,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
-    android:layout_width="120dp"
-    android:layout_height="180dp"
+    android:layout_width="110dp"
+    android:layout_height="160dp"
     android:layout_margin="6dp"
     android:stateListAnimator="@animator/lift_on_touch"
     app:cardBackgroundColor="@color/accent"
-    app:cardCornerRadius="@dimen/spacing_normal"
-    app:cardPreventCornerOverlap="true">
+    app:cardCornerRadius="6dp"
+    app:cardElevation="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/spacing_medium"
-        android:paddingBottom="@dimen/spacing_medium"
-        android:paddingEnd="@dimen/spacing_normal"
-        android:paddingStart="@dimen/spacing_normal">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvTitle"
+        <ImageView
+            android:id="@+id/imgCover"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:breakStrategy="simple"
-            android:ellipsize="end"
-            android:fontFamily="@font/averia_libre_bold"
-            android:gravity="center"
-            android:hyphenationFrequency="none"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/chipLanguage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Christ In Song" />
+            android:layout_height="match_parent"
+            android:contentDescription="@string/blank"
+            android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/chipLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_on_surface"
-            android:ellipsize="end"
-            android:fontFamily="@font/averia_libre"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="@dimen/text_size_xsmall"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Ndebele / Isuzulu" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/scrim"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacing_normal"
+            android:paddingTop="@dimen/spacing_medium"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingBottom="@dimen/spacing_medium">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:breakStrategy="simple"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hyphenationFrequency="none"
+                android:paddingBottom="@dimen/spacing_micro"
+                android:textAppearance="@style/Hymnal.TextAppearance.Title"
+                android:textColor="@color/white"
+                tools:text="Christ In Song" />
+
+            <TextView
+                android:id="@+id/chipLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/bg_on_surface"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textAppearance="@style/Hymnal.TextAppearance.Body"
+                android:textSize="@dimen/text_size_xsmall"
+                tools:text="Ndebele / Isuzulu" />
+
+        </LinearLayout>
+    </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>

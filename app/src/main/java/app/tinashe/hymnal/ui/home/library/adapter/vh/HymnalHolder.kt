@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package app.tinashe.hymnal.ui.home.library.vh
+package app.tinashe.hymnal.ui.home.library.adapter.vh
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.parseAsHtml
 import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymnal
@@ -30,7 +31,7 @@ class HymnalHolder constructor(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(hymnal: Hymnal) {
-        tvTitle.text = hymnal.name
+        tvTitle.text = hymnal.name.parseAsHtml()
         chipLanguage.text = hymnal.language
 
         val color = COLORS.random().toColor()

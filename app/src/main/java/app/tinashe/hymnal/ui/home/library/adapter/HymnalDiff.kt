@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package app.tinashe.hymnal.ui.home.library
+package app.tinashe.hymnal.ui.home.library.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import app.tinashe.hymnal.data.model.Hymnal

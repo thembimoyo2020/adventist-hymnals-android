@@ -19,37 +19,43 @@ package app.tinashe.hymnal.ui.home.library
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import app.tinashe.hymnal.data.model.Hymnal
+import app.tinashe.hymnal.data.model.HymnalCollection
 import app.tinashe.hymnal.data.model.constants.DbCollections
 import app.tinashe.hymnal.ui.base.ScopedViewModel
 import com.google.firebase.firestore.FirebaseFirestore
-import timber.log.Timber
 import javax.inject.Inject
 
 class LibraryViewModel @Inject constructor(private val fireStore: FirebaseFirestore) : ScopedViewModel() {
 
-    private val hymnalsData = MutableLiveData<List<Hymnal>>()
-    val hymnalsLiveData: LiveData<List<Hymnal>> get() = hymnalsData
+    private val hymnalCollections = MutableLiveData<List<HymnalCollection>>()
+    val hymnalCollectionsLiveData: LiveData<List<HymnalCollection>> get() = hymnalCollections
 
     init {
-        loadHymnals()
+        loadCollections()
     }
 
-    private fun loadHymnals() {
-        fireStore.collection(DbCollections.HYMNALS.value)
+    private fun loadCollections() {
+        fireStore.collection(DbCollections.CATEGORIES.value)
                 .get()
-                .addOnCompleteListener { task ->
-
-                    if (task.isSuccessful) {
-
-                        val snapshot = task.result
-
-                        val hymnals = snapshot?.mapNotNull { it.toObject(Hymnal::class.java) }
-
-                        hymnalsData.postValue(hymnals?.sorted())
-
-                    } else {
-                        Timber.e(task.exception)
+                .addOnSuccessListener { snapshot ->
+                    val collections = snapshot.map { snap ->
+                        snap.toObject(HymnalCollection::class.java).apply {
+                            id = snap.id
+                        }
                     }
+                    hymnalCollections.postValue(collections.sorted())
                 }
+    }
+
+    fun loadCollection(collection: HymnalCollection, callback: (Hymnal) -> Unit) {
+        collection.hymnals.forEach { id ->
+            fireStore.collection(DbCollections.HYMNALS.value)
+                    .document(id)
+                    .get()
+                    .addOnSuccessListener {
+                        val hymnal = it.toObject(Hymnal::class.java) ?: return@addOnSuccessListener
+                        callback.invoke(hymnal)
+                    }
+        }
     }
 }
