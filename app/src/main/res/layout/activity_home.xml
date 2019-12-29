@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019. Tinashe Mzondiwa.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,14 +16,15 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/coordinator"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
@@ -41,13 +41,70 @@
         app:menu="@menu/menu_home" />
 
 
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fabSize="normal"
-        app:layout_anchor="@id/bottomAppBar"
-        app:layout_behavior="app.tinashe.hymnal.ui.custom.FloatingActionBehaviour"
-        app:srcCompat="@drawable/round_dialpad" />-->
+        android:background="@color/window_background"
+        android:stateListAnimator="@animator/animator_raise"
+        android:theme="@style/Hymnal.AppBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searchCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/brand_navigation_view"
+                app:cardElevation="@dimen/spacing_micro"
+                app:cardCornerRadius="6dp"
+                app:contentPaddingBottom="@dimen/spacing_list"
+                app:contentPaddingLeft="@dimen/spacing_medium"
+                app:contentPaddingRight="@dimen/spacing_medium"
+                app:contentPaddingTop="@dimen/spacing_list">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/btnMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?actionBarItemBackground"
+                        android:contentDescription="@string/blank"
+                        android:src="@drawable/ic_menu" />
+
+                    <TextView
+                        android:id="@+id/tvSearchHint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="@dimen/spacing_medium"
+                        android:paddingEnd="@dimen/spacing_medium"
+                        android:text="@string/search_hint"
+                        android:textAppearance="@style/Hymnal.TextAppearance.Medium.Secondary" />
+
+                    <ImageView
+                        android:id="@+id/btnVoiceSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?actionBarItemBackground"
+                        android:contentDescription="@string/blank"
+                        android:src="@drawable/ic_keyboard_voice" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

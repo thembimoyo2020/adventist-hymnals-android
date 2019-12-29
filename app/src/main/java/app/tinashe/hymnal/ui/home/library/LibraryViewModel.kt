@@ -31,11 +31,7 @@ class LibraryViewModel @Inject constructor(private val fireStore: FirebaseFirest
     private val hymnalCollections = MutableLiveData<List<HymnalCollection>>()
     val hymnalCollectionsLiveData: LiveData<List<HymnalCollection>> get() = hymnalCollections
 
-    init {
-        loadCollections()
-    }
-
-    private fun loadCollections() {
+    fun subscribe() {
         fireStore.collection(DbCollections.CATEGORIES.value)
                 .addSnapshotListener { snapshot, exception ->
 

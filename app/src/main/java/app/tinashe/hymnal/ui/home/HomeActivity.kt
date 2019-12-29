@@ -58,10 +58,14 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun initUi() {
+        setSupportActionBar(toolbar)
         coordinator.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         bottomNav.doOnApplyWindowInsets { view, insets, padding ->
             view.updatePadding(bottom = padding.bottom + insets.systemWindowInsetBottom)
+        }
+        coordinator.doOnApplyWindowInsets { v, insets, padding ->
+            v.updatePadding(top = padding.top + insets.systemWindowInsetTop)
         }
 
         bottomNavigator = BottomNavigator.onCreateWithDetachability(
@@ -73,6 +77,10 @@ class HomeActivity : BaseActivity() {
                         R.id.nav_profile to { FragmentInfo(ProfileFragment(), true) }
                 ), defaultTab = R.id.nav_library,
                 activity = this)
+
+        searchCard.setOnClickListener {}
+        btnMenu.setOnClickListener {  }
+        btnVoiceSearch.setOnClickListener {  }
     }
 
 }
