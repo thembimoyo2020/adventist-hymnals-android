@@ -20,8 +20,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updatePadding
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.di.ViewModelFactory
+import app.tinashe.hymnal.extensions.doOnApplyWindowInsets
 import app.tinashe.hymnal.extensions.getViewModel
 import app.tinashe.hymnal.extensions.observeNonNull
 import app.tinashe.hymnal.ui.base.BasePageFragment
@@ -58,6 +60,10 @@ class LibraryFragment : BasePageFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        recyclerView.doOnApplyWindowInsets { v, insets, padding ->
+            v.updatePadding(top = padding.top + insets.systemWindowInsetTop)
+        }
 
         listAdapter = CollectionsListAdapter(viewModel)
         recyclerView.adapter = listAdapter

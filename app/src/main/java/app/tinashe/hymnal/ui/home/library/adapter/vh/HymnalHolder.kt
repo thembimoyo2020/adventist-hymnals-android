@@ -18,7 +18,6 @@ package app.tinashe.hymnal.ui.home.library.adapter.vh
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.parseAsHtml
 import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymnal
@@ -32,7 +31,7 @@ class HymnalHolder constructor(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(hymnal: Hymnal) {
-        tvTitle.text = hymnal.name.parseAsHtml()
+        tvTitle.text = hymnal.name
         chipLanguage.text = hymnal.language
 
         val color = COLORS.random().toColor()
@@ -47,7 +46,8 @@ class HymnalHolder constructor(override val containerView: View) :
 
     companion object {
         private val COLORS = arrayListOf("#4b207f", "#5e3929", "#7f264a", "#2f557f", "#e36520", "#448d21", "#3e8391")
-        fun inflate(parent: ViewGroup):
-                HymnalHolder = HymnalHolder(inflateView(R.layout.hymnal_card, parent, false))
+
+        fun inflate(parent: ViewGroup): HymnalHolder = HymnalHolder(
+                inflateView(R.layout.hymnal_card, parent, false))
     }
 }

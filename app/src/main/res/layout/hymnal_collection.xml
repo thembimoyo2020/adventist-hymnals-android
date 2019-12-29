@@ -25,7 +25,6 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
         android:drawableEnd="@drawable/ic_arrow_forward"
         android:drawablePadding="@dimen/spacing_medium"
         android:ellipsize="end"

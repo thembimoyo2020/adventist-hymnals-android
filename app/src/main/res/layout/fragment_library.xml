@@ -23,6 +23,6 @@
     android:clipToPadding="false"
     android:paddingBottom="@dimen/spacing_huge"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    android:paddingTop="@dimen/spacing_huge"
+    android:paddingTop="@dimen/spacing_medium"
     android:scrollbarStyle="outsideOverlay"
     android:scrollbars="vertical" />

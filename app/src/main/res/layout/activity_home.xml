@@ -36,7 +36,7 @@
         app:elevation="@dimen/spacing_normal"
         app:itemIconTint="@color/nav_tint_color"
         app:itemTextColor="@color/nav_tint_color"
-        app:labelVisibilityMode="selected"
+        app:labelVisibilityMode="labeled"
         app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:menu="@menu/menu_home" />
 
