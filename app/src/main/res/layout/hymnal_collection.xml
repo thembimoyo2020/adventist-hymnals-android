@@ -29,14 +29,12 @@
         android:drawableEnd="@drawable/ic_arrow_forward"
         android:drawablePadding="@dimen/spacing_medium"
         android:ellipsize="end"
-        android:fontFamily="@font/averia_gruesa_libre"
         android:maxLines="1"
         android:paddingStart="@dimen/spacing_medium_large"
         android:paddingTop="@dimen/spacing_list"
         android:paddingEnd="@dimen/spacing_medium_large"
         android:paddingBottom="@dimen/spacing_normal"
-        android:textAppearance="@style/Hymnal.TextAppearance.Body"
-        android:textSize="@dimen/text_size_medium"
+        android:textAppearance="@style/Hymnal.TextAppearance.Medium"
         tools:text="Christ In Song" />
 
     <androidx.recyclerview.widget.RecyclerView

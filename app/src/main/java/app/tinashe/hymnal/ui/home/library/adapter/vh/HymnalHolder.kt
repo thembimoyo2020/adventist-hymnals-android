@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymnal
 import app.tinashe.hymnal.extensions.inflateView
+import app.tinashe.hymnal.extensions.loadImage
 import app.tinashe.hymnal.extensions.toColor
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.hymnal_card.*
@@ -36,6 +37,12 @@ class HymnalHolder constructor(override val containerView: View) :
 
         val color = COLORS.random().toColor()
         card.setCardBackgroundColor(color)
+
+        if (hymnal.cover.isNullOrEmpty()) {
+            imgCover.setImageDrawable(null)
+        } else {
+            imgCover.loadImage(hymnal.cover)
+        }
     }
 
     companion object {

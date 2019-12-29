@@ -41,7 +41,7 @@
     </style>
 
     <style name="Hymnal.TextAppearance.Body" parent="TextAppearance.AppCompat.Body1">
-        <item name="android:fontFamily">@font/averia_libre</item>
+        <item name="android:fontFamily">@font/sans_regular</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:lineSpacingExtra">4dp</item>
     </style>
@@ -51,12 +51,13 @@
     </style>
 
     <style name="Hymnal.TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
-        <item name="android:fontFamily">@font/averia_libre_bold</item>
+        <item name="android:fontFamily">@font/sans_bold</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="Hymnal.TextAppearance.Medium" parent="TextAppearance.AppCompat.Medium">
-
+        <item name="android:fontFamily">@font/sans_regular</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="Hymnal.TextAppearance.Medium.Secondary">

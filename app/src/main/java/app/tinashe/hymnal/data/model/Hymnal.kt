@@ -23,7 +23,9 @@ open class Hymnal(var name: String,
                   var language: String,
 
                   @PrimaryKey
-                  var code: String) : Comparable<Hymnal> {
+                  var code: String,
+
+                  var cover: String? = null) : Comparable<Hymnal> {
 
     constructor() : this("", "", "")
 

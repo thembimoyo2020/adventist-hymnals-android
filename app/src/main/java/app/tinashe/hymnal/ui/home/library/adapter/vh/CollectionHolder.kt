@@ -48,7 +48,7 @@ class CollectionHolder constructor(override val containerView: View,
         val hymnals = arrayListOf<Hymnal>()
         viewModel.loadCollection(collection) {
             hymnals.add(it)
-            listAdapter.submitList(hymnals.sorted())
+            listAdapter.submitList(hymnals.distinct().sorted())
             recyclerView.post {
                 recyclerView.layoutManager?.scrollToPosition(0)
             }

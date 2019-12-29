@@ -23,6 +23,7 @@ import app.tinashe.hymnal.data.model.HymnalCollection
 import app.tinashe.hymnal.data.model.constants.DbCollections
 import app.tinashe.hymnal.ui.base.ScopedViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import timber.log.Timber
 import javax.inject.Inject
 
 class LibraryViewModel @Inject constructor(private val fireStore: FirebaseFirestore) : ScopedViewModel() {
@@ -36,14 +37,20 @@ class LibraryViewModel @Inject constructor(private val fireStore: FirebaseFirest
 
     private fun loadCollections() {
         fireStore.collection(DbCollections.CATEGORIES.value)
-                .get()
-                .addOnSuccessListener { snapshot ->
-                    val collections = snapshot.map { snap ->
+                .addSnapshotListener { snapshot, exception ->
+
+                    if (exception != null) {
+                        Timber.e(exception)
+                        return@addSnapshotListener
+                    }
+
+                    val collections = snapshot?.map { snap ->
                         snap.toObject(HymnalCollection::class.java).apply {
                             id = snap.id
                         }
                     }
-                    hymnalCollections.postValue(collections.sorted())
+
+                    hymnalCollections.postValue(collections?.sorted())
                 }
     }
 
@@ -51,9 +58,14 @@ class LibraryViewModel @Inject constructor(private val fireStore: FirebaseFirest
         collection.hymnals.forEach { id ->
             fireStore.collection(DbCollections.HYMNALS.value)
                     .document(id)
-                    .get()
-                    .addOnSuccessListener {
-                        val hymnal = it.toObject(Hymnal::class.java) ?: return@addOnSuccessListener
+                    .addSnapshotListener { snapshot, exception ->
+                        if (exception != null) {
+                            Timber.e(exception)
+                            return@addSnapshotListener
+                        }
+
+                        val hymnal = snapshot?.toObject(Hymnal::class.java)
+                                ?: return@addSnapshotListener
                         callback.invoke(hymnal)
                     }
         }
