@@ -16,51 +16,38 @@
 
 package app.tinashe.hymnal.ui.home
 
-import androidx.lifecycle.MutableLiveData
-import app.tinashe.hymnal.data.db.HymnalDatabase
-import app.tinashe.hymnal.data.model.Hymn
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import app.tinashe.hymnal.ui.base.BasePageFragment
 import app.tinashe.hymnal.ui.base.ScopedViewModel
+import app.tinashe.hymnal.ui.base.SingleLiveEvent
 import app.tinashe.hymnal.utils.prefs.HymnalPrefs
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(private val database: HymnalDatabase,
-                                        private val prefs: HymnalPrefs) : ScopedViewModel() {
+class HomeViewModel @Inject constructor(private val prefs: HymnalPrefs) : ScopedViewModel() {
 
-    var hymns = MutableLiveData<List<Hymn>>()
-    var number = MutableLiveData<Int>()
+    private val disposables = CompositeDisposable()
 
-    init {
-        fetchHymns()
-    }
+    private val currentFragment = SingleLiveEvent<BasePageFragment>()
+    val currentFragmentLiveData: LiveData<BasePageFragment> get() = currentFragment
 
-    private fun fetchHymns() {
-        launch {
-            val list = database.hymnsDao().getHymns(prefs.getLanguage())
-
-            withContext(Dispatchers.Main) {
-                hymns.value = list
-                number.value = prefs.getLastHymnNumber()
-            }
+    fun subscribeToFragmentCommands(commands: Observable<Fragment>) {
+        if (disposables.size() > 0) {
+            Timber.i("Already subscribing")
+            return
         }
-    }
+        val disposable = commands
+                .subscribe({
+                    if (it is BasePageFragment) {
+                        currentFragment.postValue(it)
+                    }
+                }, {
+                    Timber.e(it)
+                })
 
-    fun hymnalChanged(language: String) {
-        prefs.setLanguage(language)
-
-        fetchHymns()
-    }
-
-    fun savePosition(position: Int) {
-        prefs.setLastHymnNumber(position + 1)
-        number.postValue(position + 1)
-    }
-
-    fun switchToHymn(hymn: Hymn){
-        prefs.setLastHymnNumber(hymn.number)
-
-        hymnalChanged(hymn.language)
+        disposables.add(disposable)
     }
 }

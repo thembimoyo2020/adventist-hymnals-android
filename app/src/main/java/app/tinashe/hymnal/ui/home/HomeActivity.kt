@@ -23,7 +23,14 @@ import app.tinashe.hymnal.R
 import app.tinashe.hymnal.di.ViewModelFactory
 import app.tinashe.hymnal.extensions.doOnApplyWindowInsets
 import app.tinashe.hymnal.extensions.getViewModel
+import app.tinashe.hymnal.extensions.observeNonNull
 import app.tinashe.hymnal.ui.base.BaseActivity
+import app.tinashe.hymnal.ui.home.hymnal.HymnalFragment
+import app.tinashe.hymnal.ui.home.library.LibraryFragment
+import app.tinashe.hymnal.ui.home.profile.ProfileFragment
+import app.tinashe.hymnal.ui.home.search.SearchFragment
+import com.pandora.bottomnavigator.BottomNavigator
+import com.pandora.bottomnavigator.FragmentInfo
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
@@ -32,6 +39,8 @@ class HomeActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    private lateinit var bottomNavigator: BottomNavigator
 
     private lateinit var viewModel: HomeViewModel
 
@@ -43,7 +52,10 @@ class HomeActivity : BaseActivity() {
         initUi()
 
         viewModel = getViewModel(this, viewModelFactory)
-
+        viewModel.currentFragmentLiveData.observeNonNull(this) {
+            it.scrollToTop()
+        }
+        viewModel.subscribeToFragmentCommands(bottomNavigator.resetRootFragmentCommand())
     }
 
     private fun initUi() {
@@ -52,6 +64,17 @@ class HomeActivity : BaseActivity() {
         bottomNav.doOnApplyWindowInsets { view, insets, padding ->
             view.updatePadding(bottom = padding.bottom + insets.systemWindowInsetBottom)
         }
+
+        bottomNavigator = BottomNavigator.onCreateWithDetachability(
+                fragmentContainer = R.id.fragment_container,
+                bottomNavigationView = bottomNav,
+                rootFragmentsFactory = mapOf(
+                        R.id.nav_library to { FragmentInfo(LibraryFragment(), false) },
+                        R.id.nav_read to { FragmentInfo(HymnalFragment(), true) },
+                        R.id.nav_search to { FragmentInfo(SearchFragment(), false) },
+                        R.id.nav_profile to { FragmentInfo(ProfileFragment(), true) }
+                ), defaultTab = R.id.nav_library,
+                activity = this)
     }
 
 }

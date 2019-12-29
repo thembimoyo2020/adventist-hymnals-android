@@ -28,21 +28,8 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
 import androidx.core.view.marginRight
 import androidx.core.view.marginTop
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import app.tinashe.hymnal.di.ViewModelFactory
-
-inline fun <reified T : ViewModel> getViewModel(activity: FragmentActivity, factory: ViewModelFactory): T {
-    return ViewModelProviders.of(activity, factory)[T::class.java]
-}
-
-inline fun <reified T : ViewModel> getViewModel(activity: Fragment, factory: ViewModelFactory): T {
-    return ViewModelProviders.of(activity, factory)[T::class.java]
-}
 
 fun View.hide() {
     visibility = View.GONE
