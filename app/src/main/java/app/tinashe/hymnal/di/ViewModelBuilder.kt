@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import app.tinashe.hymnal.ui.home.HomeViewModel
 import app.tinashe.hymnal.ui.home.hymns.search.SearchViewModel
+import app.tinashe.hymnal.ui.home.library.LibraryViewModel
 import app.tinashe.hymnal.ui.home.navigation.NavigationViewModel
 import app.tinashe.hymnal.ui.splash.SplashViewModel
 import dagger.Binds
@@ -38,6 +39,11 @@ internal abstract class ViewModelBuilder {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     internal abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LibraryViewModel::class)
+    internal abstract fun bindLibraryViewModel(libraryViewModel: LibraryViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -18,9 +18,9 @@ package app.tinashe.hymnal.ui.home.navigation
 
 import androidx.lifecycle.MutableLiveData
 import app.tinashe.hymnal.data.db.HymnalDatabase
-import app.tinashe.hymnal.data.model.Collections
 import app.tinashe.hymnal.data.model.Hymnal
 import app.tinashe.hymnal.data.model.LocalHymnal
+import app.tinashe.hymnal.data.model.constants.DbCollections
 import app.tinashe.hymnal.ui.base.ScopedViewModel
 import app.tinashe.hymnal.ui.base.SingleLiveEvent
 import com.google.firebase.firestore.FirebaseFirestore
@@ -57,7 +57,7 @@ class NavigationViewModel @Inject constructor(private val fireStore: FirebaseFir
                 hymnals.value = result
             }
 
-            val collectionReference = fireStore.collection(Collections.HYMNALS)
+            val collectionReference = fireStore.collection(DbCollections.HYMNALS.value)
             collectionReference.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val snapshot = task.result

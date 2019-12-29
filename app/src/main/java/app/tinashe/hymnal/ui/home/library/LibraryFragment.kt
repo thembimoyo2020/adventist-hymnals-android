@@ -16,10 +16,52 @@
 
 package app.tinashe.hymnal.ui.home.library
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import app.tinashe.hymnal.R
+import app.tinashe.hymnal.di.ViewModelFactory
+import app.tinashe.hymnal.extensions.getViewModel
+import app.tinashe.hymnal.extensions.observeNonNull
 import app.tinashe.hymnal.ui.base.BasePageFragment
+import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_library.*
+import javax.inject.Inject
 
 class LibraryFragment : BasePageFragment() {
-    override fun scrollToTop() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val listAdapter = LibraryListAdapter()
+
+    private lateinit var viewModel: LibraryViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+        viewModel = getViewModel(this, viewModelFactory)
+        viewModel.hymnalsLiveData.observeNonNull(this) {
+            listAdapter.submitList(it)
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_library, container, false)
+    }
+
+    override fun scrollToTop() {
+        recyclerView.smoothScrollToPosition(0)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 3)
+            adapter = listAdapter
+        }
     }
 }

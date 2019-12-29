@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package app.tinashe.hymnal.data.model;
+package app.tinashe.hymnal.ui.home.library
 
-import androidx.annotation.StringDef;
+import androidx.recyclerview.widget.DiffUtil
+import app.tinashe.hymnal.data.model.Hymnal
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+object HymnalDiff : DiffUtil.ItemCallback<Hymnal>() {
+    override fun areItemsTheSame(oldItem: Hymnal, newItem: Hymnal): Boolean {
+        return oldItem.code == newItem.code
+    }
 
-@StringDef({Collections.HYMNALS})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Collections {
-
-    String HYMNALS = "hymnals";
+    override fun areContentsTheSame(oldItem: Hymnal, newItem: Hymnal): Boolean {
+        return oldItem == newItem
+    }
 }

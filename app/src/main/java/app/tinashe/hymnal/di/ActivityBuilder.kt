@@ -18,6 +18,7 @@ package app.tinashe.hymnal.di
 
 import app.tinashe.hymnal.ui.home.HomeActivity
 import app.tinashe.hymnal.ui.home.hymns.search.SearchActivity
+import app.tinashe.hymnal.ui.home.library.LibraryFragment
 import app.tinashe.hymnal.ui.home.navigation.NavigationFragment
 import app.tinashe.hymnal.ui.splash.SplashActivity
 import dagger.Module
@@ -31,6 +32,9 @@ internal abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract fun bindHomeActivity(): HomeActivity
+
+    @ContributesAndroidInjector
+    abstract fun bindLibraryFragment(): LibraryFragment
 
     @ContributesAndroidInjector
     abstract fun bindNavigationFragment(): NavigationFragment

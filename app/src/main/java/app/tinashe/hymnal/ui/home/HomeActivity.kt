@@ -28,7 +28,6 @@ import app.tinashe.hymnal.ui.base.BaseActivity
 import app.tinashe.hymnal.ui.home.hymnal.HymnalFragment
 import app.tinashe.hymnal.ui.home.library.LibraryFragment
 import app.tinashe.hymnal.ui.home.profile.ProfileFragment
-import app.tinashe.hymnal.ui.home.search.SearchFragment
 import com.pandora.bottomnavigator.BottomNavigator
 import com.pandora.bottomnavigator.FragmentInfo
 import dagger.android.AndroidInjection
@@ -71,7 +70,6 @@ class HomeActivity : BaseActivity() {
                 rootFragmentsFactory = mapOf(
                         R.id.nav_library to { FragmentInfo(LibraryFragment(), false) },
                         R.id.nav_read to { FragmentInfo(HymnalFragment(), true) },
-                        R.id.nav_search to { FragmentInfo(SearchFragment(), false) },
                         R.id.nav_profile to { FragmentInfo(ProfileFragment(), true) }
                 ), defaultTab = R.id.nav_library,
                 activity = this)
