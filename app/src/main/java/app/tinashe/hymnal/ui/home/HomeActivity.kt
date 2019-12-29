@@ -16,111 +16,42 @@
 
 package app.tinashe.hymnal.ui.home
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.IdRes
-import androidx.lifecycle.Observer
-import androidx.viewpager.widget.ViewPager
+import android.view.View
+import androidx.core.view.updatePadding
 import app.tinashe.hymnal.R
-import app.tinashe.hymnal.data.model.Hymn
 import app.tinashe.hymnal.di.ViewModelFactory
+import app.tinashe.hymnal.extensions.doOnApplyWindowInsets
+import app.tinashe.hymnal.extensions.getViewModel
 import app.tinashe.hymnal.ui.base.BaseActivity
-import app.tinashe.hymnal.ui.home.hymns.HymnFragment
-import app.tinashe.hymnal.ui.home.hymns.HymnsFragmentPagerAdapter
-import app.tinashe.hymnal.ui.home.hymns.search.SearchActivity
-import app.tinashe.hymnal.ui.home.navigation.NavigationFragment
-import app.tinashe.hymnal.utils.getViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.content_home.*
 import javax.inject.Inject
 
-class HomeActivity : BaseActivity(), HomeCallbacks {
+class HomeActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: HomeViewModel
 
-    private lateinit var pagerAdapter: HymnsFragmentPagerAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         setContentView(R.layout.activity_home)
 
-        setSupportActionBar(bottomAppBar)
-
         initUi()
 
         viewModel = getViewModel(this, viewModelFactory)
-        viewModel.hymns.observe(this, Observer {
-            it?.let { hymns ->
-                pagerAdapter.hymns = hymns
-                viewPager.adapter = pagerAdapter
-            }
-        })
-        viewModel.number.observe(this, Observer { it?.let { number -> viewPager.currentItem = number - 1 } })
+
     }
 
     private fun initUi() {
-        fab.setOnClickListener { _ ->
-            val fragment = PickerFragment.newInstance {
-                viewPager.currentItem = (it - 1)
-            }
-            fragment.show(supportFragmentManager, fragment.tag)
-        }
-
-        bottomAppBar.setNavigationOnClickListener {
-            val fragment = NavigationFragment()
-            fragment.show(supportFragmentManager, fragment.tag)
-        }
-
-        viewPager.pageMargin = resources.getDimensionPixelSize(R.dimen.spacing_medium)
-        viewPager.setPageMarginDrawable(R.drawable.page_margin)
-        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                if (!fab.isShown) {
-                    fab.show()
-                }
-            }
-        })
-        pagerAdapter = HymnsFragmentPagerAdapter(supportFragmentManager)
-    }
-
-    override fun onStop() {
-        viewModel.savePosition(viewPager.currentItem)
-        super.onStop()
-    }
-
-    override fun hymnalSelected(language: String) {
-        viewModel.hymnalChanged(language)
-    }
-
-    override fun themeChanged() {
-        viewPager.postDelayed({ recreate() }, 500)
-    }
-
-    override fun navigateTo(@IdRes selection: Int) {
-        when (selection) {
-            R.id.nav_settings -> {
-            }
-            R.id.nav_donate -> {
-            }
-            R.id.nav_feedback -> {
-            }
+        coordinator.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        bottomNav.doOnApplyWindowInsets { view, insets, padding ->
+            view.updatePadding(bottom = padding.bottom + insets.systemWindowInsetBottom)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == HymnFragment.RC_SEARCH && resultCode == Activity.RESULT_OK) {
-            val hymn: Hymn = data?.extras?.getParcelable(SearchActivity.SELECTED_HYMN) ?: return
-
-            viewPager.postDelayed({ viewModel.switchToHymn(hymn) }, 300)
-        }
-    }
 }

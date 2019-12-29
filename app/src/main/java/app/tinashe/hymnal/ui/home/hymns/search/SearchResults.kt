@@ -22,8 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymn
+import app.tinashe.hymnal.extensions.vertical
 import app.tinashe.hymnal.ui.home.hymns.HymnsListAdapter
-import app.tinashe.hymnal.utils.vertical
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class SearchResultsPagerAdapter constructor(fragmentManager: androidx.fragment.app.FragmentManager,

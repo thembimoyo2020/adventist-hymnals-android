@@ -22,10 +22,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymnal
-import app.tinashe.hymnal.utils.inflateView
-import app.tinashe.hymnal.utils.random
-import app.tinashe.hymnal.utils.tint
-import app.tinashe.hymnal.utils.toColor
+import app.tinashe.hymnal.extensions.inflateView
+import app.tinashe.hymnal.extensions.random
+import app.tinashe.hymnal.extensions.tint
+import app.tinashe.hymnal.extensions.toColor
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.hymnal_item.*
 

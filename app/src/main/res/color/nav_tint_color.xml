@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (c) 2019. Tinashe Mzondiwa.
   ~
@@ -14,17 +15,7 @@
   ~ limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">ChristInSong</string>
-
-    <string name="blank"/>
-    <string name="book">Book</string>
-    <string name="donate">Donate</string>
-    <string name="library">Library</string>
-    <string name="menu">Menu</string>
-    <string name="night_mode">Night Mode</string>
-    <string name="profile">Profile</string>
-    <string name="search">Search</string>
-    <string name="settings">Settings</string>
-    <string name="help_feedback">Help &amp; Feedback</string>
-</resources>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/primary" android:state_selected="true" />
+    <item android:color="@color/secondary" />
+</selector>

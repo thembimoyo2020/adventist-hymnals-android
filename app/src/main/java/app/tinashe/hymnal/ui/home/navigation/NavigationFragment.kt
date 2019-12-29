@@ -29,11 +29,11 @@ import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.constants.UiPref
 import app.tinashe.hymnal.di.ViewModelFactory
+import app.tinashe.hymnal.extensions.getViewModel
+import app.tinashe.hymnal.extensions.vertical
 import app.tinashe.hymnal.ui.base.RoundedBottomSheetDialogFragment
 import app.tinashe.hymnal.utils.Helper
-import app.tinashe.hymnal.utils.getViewModel
 import app.tinashe.hymnal.utils.prefs.HymnalPrefs
-import app.tinashe.hymnal.utils.vertical
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.android.support.AndroidSupportInjection

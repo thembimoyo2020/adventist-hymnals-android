@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.data.model.Hymn
-import app.tinashe.hymnal.utils.inflateView
+import app.tinashe.hymnal.extensions.inflateView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.hymn_item.*
 

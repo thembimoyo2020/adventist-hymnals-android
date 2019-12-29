@@ -24,8 +24,8 @@ import androidx.lifecycle.Observer
 import app.tinashe.hymnal.BuildConfig
 import app.tinashe.hymnal.R
 import app.tinashe.hymnal.di.ViewModelFactory
+import app.tinashe.hymnal.extensions.getViewModel
 import app.tinashe.hymnal.ui.home.HomeActivity
-import app.tinashe.hymnal.utils.getViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
