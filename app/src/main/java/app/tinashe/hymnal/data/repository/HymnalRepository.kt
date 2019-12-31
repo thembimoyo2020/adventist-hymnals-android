@@ -16,10 +16,13 @@
 
 package app.tinashe.hymnal.data.repository
 
-import androidx.lifecycle.LiveData
 import app.tinashe.hymnal.data.model.Hymnal
+import app.tinashe.hymnal.data.model.HymnalCollection
 
 interface HymnalRepository {
 
-    fun listHymnals(): LiveData<List<Hymnal>>
+    suspend fun listCollections(): List<HymnalCollection>
+
+    suspend fun listHymnals(collection: HymnalCollection): List<Hymnal>
+
 }

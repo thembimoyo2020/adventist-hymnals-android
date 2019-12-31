@@ -21,16 +21,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
 import app.tinashe.hymnal.data.db.dao.HymnalDao
 import app.tinashe.hymnal.data.db.dao.HymnsDao
 import app.tinashe.hymnal.data.model.Hymn
 import app.tinashe.hymnal.data.model.LocalHymnal
-import app.tinashe.hymnal.utils.HymnsUtil
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 @Database(entities = [(LocalHymnal::class), (Hymn::class)], version = 1)
 @TypeConverters(DataTypeConverters::class)
@@ -41,7 +35,7 @@ abstract class HymnalDatabase : RoomDatabase() {
     abstract fun hymnsDao(): HymnsDao
 
     companion object {
-        private const val DATABASE_NAME = "cis_hymnal_db"
+        private const val DATABASE_NAME = "hymnal_db"
 
         @Volatile
         private var INSTANCE: HymnalDatabase? = null
@@ -53,28 +47,6 @@ abstract class HymnalDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) = Room.databaseBuilder(context, HymnalDatabase::class.java, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
-                .addCallback(object : Callback(), CoroutineScope {
-                    override val coroutineContext: CoroutineContext
-                        get() = Dispatchers.IO
-
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-
-                        /**
-                         * Load default hymns when database is created
-                         */
-                        launch {
-                            val database = getInstance(context)
-
-                            database.hymnalDao()
-                                    .insert(LocalHymnal.default)
-
-                            val hymns = HymnsUtil.getHymns(context)
-
-                            hymns.forEach { database.hymnsDao().insert(it) }
-                        }
-                    }
-                })
                 .build()
     }
 }

@@ -19,8 +19,11 @@ package app.tinashe.hymnal.di
 import android.content.Context
 import app.tinashe.hymnal.HymnalApp
 import app.tinashe.hymnal.data.db.HymnalDatabase
+import app.tinashe.hymnal.data.repository.HymnalRepository
+import app.tinashe.hymnal.data.repository.HymnalRepositoryImpl
 import app.tinashe.hymnal.utils.prefs.HymnalPrefs
 import app.tinashe.hymnal.utils.prefs.HymnalPrefsImpl
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -40,4 +43,8 @@ internal class HymnalAppModule {
     @Singleton
     fun providePrefs(context: Context): HymnalPrefs = HymnalPrefsImpl(context)
 
+    @Provides
+    @Singleton
+    fun provideRepository(firestore: FirebaseFirestore):
+            HymnalRepository = HymnalRepositoryImpl(firestore)
 }

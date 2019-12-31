@@ -19,9 +19,7 @@ package app.tinashe.hymnal.ui.splash
 import app.tinashe.hymnal.data.db.HymnalDatabase
 import app.tinashe.hymnal.ui.base.ScopedViewModel
 import app.tinashe.hymnal.ui.base.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -38,9 +36,7 @@ class SplashViewModel @Inject constructor(database: HymnalDatabase) : ScopedView
             Timber.d("HYMNALS: ${list.size}")
             Timber.d("ENG-HYMNS: ${hymns.size}")
 
-            withContext(Dispatchers.Main) {
-                initialised.postValue(true)
-            }
+            initialised.postValue(true)
         }
     }
 }

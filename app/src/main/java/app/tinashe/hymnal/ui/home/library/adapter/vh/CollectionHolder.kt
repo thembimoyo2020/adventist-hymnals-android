@@ -20,10 +20,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import app.tinashe.hymnal.R
-import app.tinashe.hymnal.data.model.Hymnal
 import app.tinashe.hymnal.data.model.HymnalCollection
 import app.tinashe.hymnal.extensions.horizontal
 import app.tinashe.hymnal.extensions.inflateView
+import app.tinashe.hymnal.extensions.observeNonNull
 import app.tinashe.hymnal.ui.home.library.LibraryCallbacks
 import app.tinashe.hymnal.ui.home.library.LibraryViewModel
 import app.tinashe.hymnal.ui.home.library.adapter.LibraryListAdapter
@@ -47,13 +47,8 @@ class CollectionHolder constructor(override val containerView: View,
         val listAdapter = LibraryListAdapter(callbacks)
         recyclerView.adapter = listAdapter
 
-        val hymnals = arrayListOf<Hymnal>()
-        viewModel.loadCollection(collection) {
-            hymnals.add(it)
-            listAdapter.submitList(hymnals.distinct().sorted())
-            recyclerView.post {
-                recyclerView.layoutManager?.scrollToPosition(0)
-            }
+        viewModel.collectionHymnals(collection).observeNonNull(callbacks) {
+            listAdapter.submitList(it)
         }
     }
 

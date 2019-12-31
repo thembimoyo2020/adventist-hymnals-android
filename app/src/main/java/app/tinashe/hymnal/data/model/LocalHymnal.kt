@@ -17,12 +17,16 @@
 package app.tinashe.hymnal.data.model
 
 import androidx.room.Entity
+import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parcelize
 import java.util.Calendar
 import java.util.Date
 
+@Parcelize
 @Entity(tableName = "hymnals")
 class LocalHymnal : Hymnal() {
 
+    @IgnoredOnParcel
     var lastAccessed: Date? = null
 
     companion object {

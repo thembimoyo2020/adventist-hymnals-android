@@ -94,12 +94,13 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${versions.coroutines}"
 
     implementation "com.google.firebase:firebase-analytics:${versions.firebase_analytics}"
     implementation "com.google.firebase:firebase-auth:${versions.firebase_auth}"
     implementation "com.google.firebase:firebase-firestore:${versions.firebase_store}"
+    implementation "com.google.firebase:firebase-firestore-ktx:${versions.firebase_store}"
     implementation "com.google.firebase:firebase-storage:${versions.firebase_storage}"
-    implementation "com.google.firebase:firebase-messaging:${versions.firebase_msg}"
     implementation "com.firebaseui:firebase-ui-storage:${versions.firebase_ui}"
 
     implementation "com.jakewharton.timber:timber:${versions.timber}"

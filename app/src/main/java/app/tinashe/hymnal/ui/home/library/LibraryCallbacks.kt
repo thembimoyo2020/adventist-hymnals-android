@@ -17,10 +17,11 @@
 package app.tinashe.hymnal.ui.home.library
 
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import app.tinashe.hymnal.data.model.Hymnal
 import app.tinashe.hymnal.data.model.HymnalCollection
 
-interface LibraryCallbacks {
+interface LibraryCallbacks: LifecycleOwner {
 
     fun openHymnal(hymnal: Hymnal, sharedElement: View)
 

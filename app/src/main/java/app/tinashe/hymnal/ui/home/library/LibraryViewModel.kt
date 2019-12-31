@@ -20,50 +20,33 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import app.tinashe.hymnal.data.model.Hymnal
 import app.tinashe.hymnal.data.model.HymnalCollection
-import app.tinashe.hymnal.data.model.constants.DbCollections
+import app.tinashe.hymnal.data.repository.HymnalRepository
 import app.tinashe.hymnal.ui.base.ScopedViewModel
-import com.google.firebase.firestore.FirebaseFirestore
-import timber.log.Timber
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LibraryViewModel @Inject constructor(private val fireStore: FirebaseFirestore) : ScopedViewModel() {
+class LibraryViewModel @Inject constructor(private val repository: HymnalRepository) : ScopedViewModel() {
 
     private val hymnalCollections = MutableLiveData<List<HymnalCollection>>()
     val hymnalCollectionsLiveData: LiveData<List<HymnalCollection>> get() = hymnalCollections
 
     fun subscribe() {
-        fireStore.collection(DbCollections.CATEGORIES.value)
-                .addSnapshotListener { snapshot, exception ->
 
-                    if (exception != null) {
-                        Timber.e(exception)
-                        return@addSnapshotListener
-                    }
-
-                    val collections = snapshot?.map { snap ->
-                        snap.toObject(HymnalCollection::class.java).apply {
-                            id = snap.id
-                        }
-                    }
-
-                    hymnalCollections.postValue(collections?.sorted())
-                }
+        launch {
+            val collections = repository.listCollections()
+            hymnalCollections.postValue(collections.sorted())
+        }
     }
 
-    fun loadCollection(collection: HymnalCollection, callback: (Hymnal) -> Unit) {
-        collection.hymnals.forEach { id ->
-            fireStore.collection(DbCollections.HYMNALS.value)
-                    .document(id)
-                    .addSnapshotListener { snapshot, exception ->
-                        if (exception != null) {
-                            Timber.e(exception)
-                            return@addSnapshotListener
-                        }
+    fun collectionHymnals(collection: HymnalCollection): LiveData<List<Hymnal>> {
 
-                        val hymnal = snapshot?.toObject(Hymnal::class.java)
-                                ?: return@addSnapshotListener
-                        callback.invoke(hymnal)
-                    }
+        val mutableLiveData = MutableLiveData<List<Hymnal>>()
+
+        launch {
+            val hymnals = repository.listHymnals(collection)
+            mutableLiveData.postValue(hymnals)
         }
+
+        return mutableLiveData
     }
 }

@@ -19,6 +19,8 @@ package app.tinashe.hymnal.di
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
@@ -30,13 +32,12 @@ class FirebaseModule {
     @Provides
     @Singleton
     fun provideFireStoreDatabase(): FirebaseFirestore {
-        val store = FirebaseFirestore.getInstance()
-        val settings = FirebaseFirestoreSettings.Builder()
+        val firestore = Firebase.firestore
+        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build()
-        store.firestoreSettings = settings
 
-        return store
+        return firestore
     }
 
     @Provides
