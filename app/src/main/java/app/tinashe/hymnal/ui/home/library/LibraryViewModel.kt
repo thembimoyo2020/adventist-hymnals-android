@@ -44,7 +44,7 @@ class LibraryViewModel @Inject constructor(private val repository: HymnalReposit
 
         launch {
             val hymnals = repository.listHymnals(collection)
-            mutableLiveData.postValue(hymnals)
+            mutableLiveData.postValue(hymnals.sorted())
         }
 
         return mutableLiveData

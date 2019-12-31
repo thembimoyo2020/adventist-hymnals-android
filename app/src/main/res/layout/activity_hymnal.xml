@@ -97,9 +97,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_medium"
                     android:layout_toEndOf="@+id/cardCover"
-                    android:ellipsize="end"
-                    android:maxLines="8"
+                    android:lineSpacingExtra="2sp"
+                    android:textColorLink="?android:attr/textColorSecondary"
                     android:textAppearance="@style/Hymnal.TextAppearance.Body.Secondary"
+                    android:textSize="@dimen/text_size_small"
                     tools:text="@tools:sample/lorem/random" />
 
             </RelativeLayout>

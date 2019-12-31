@@ -29,7 +29,9 @@ open class Hymnal(var name: String,
                   @PrimaryKey
                   var code: String,
 
-                  var cover: String? = null) : Comparable<Hymnal>, Parcelable {
+                  var cover: String? = null,
+
+                  var description: String? = null) : Comparable<Hymnal>, Parcelable {
 
     constructor() : this("", "", "")
 

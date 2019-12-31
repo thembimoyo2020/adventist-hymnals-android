@@ -27,11 +27,16 @@ import app.tinashe.hymnal.extensions.loadImage
 import app.tinashe.hymnal.ui.base.BaseActivity
 import app.tinashe.hymnal.ui.home.hymnal.categories.CategoriesPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import io.noties.markwon.Markwon
 import kotlinx.android.synthetic.main.activity_hymnal.*
 
 class HymnalActivity : BaseActivity() {
 
     private lateinit var pagerAdapter: CategoriesPagerAdapter
+
+    private val markwon: Markwon by lazy {
+        Markwon.create(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +48,8 @@ class HymnalActivity : BaseActivity() {
         toolbarTitle.text = hymnal.name
         tvTitle.text = hymnal.name
         imgCover.loadImage(hymnal.cover)
-        tvDescription.text = "Aenean consequat volutpat lorem, vel malesuada leo rutrum sit amet. Sed in finibus velit, eu rhoncus dui. Praesent sodales posuere venenatis."
+
+        markwon.setMarkdown(tvDescription, hymnal.description ?: "")
     }
 
     private fun initUI() {
