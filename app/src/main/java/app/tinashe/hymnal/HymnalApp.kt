@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019. Tinashe Mzondiwa.
+ * Copyright (c) 2020. Tinashe Mzondiwa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
 import app.tinashe.hymnal.di.DaggerHymnalAppComponent
+import app.tinashe.hymnal.extensions.CrashlyticsTree
 import app.tinashe.hymnal.utils.Helper
 import app.tinashe.hymnal.utils.prefs.HymnalPrefs
 import dagger.android.AndroidInjector
@@ -49,6 +50,8 @@ class HymnalApp : Application(), HasActivityInjector, HasSupportFragmentInjector
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(CrashlyticsTree())
         }
 
         DaggerHymnalAppComponent.builder()
